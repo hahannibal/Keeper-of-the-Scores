@@ -45,6 +45,7 @@ namespace Keeper_of_the_Scores
             team1Score.Add(score);
 
             Console.WriteLine($"Wow! {score.scorer.Name} just made a point with the help of {score.assister.Name} for {score.team}! The current score is: {team1Score.Count} : {team2Score.Count}");
+            Console.WriteLine($"This happened at {score.dateTime}");
 
         }
     }
