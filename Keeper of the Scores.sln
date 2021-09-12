@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31424.327
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Keeper of the Scores", "Keeper of the Scores.csproj", "{73BFABDA-1D03-41A8-A07A-F58466B8C471}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{73BFABDA-1D03-41A8-A07A-F58466B8C471}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73BFABDA-1D03-41A8-A07A-F58466B8C471}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73BFABDA-1D03-41A8-A07A-F58466B8C471}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73BFABDA-1D03-41A8-A07A-F58466B8C471}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BD2DF85A-6C70-4EDE-B5AD-306DE786878F}
+	EndGlobalSection
+EndGlobal
