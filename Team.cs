@@ -1,0 +1,29 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Keeper_of_the_Scores
+{
+    class Team
+    {
+        private string _teamName;
+
+        public string TeamName
+        {
+            get { return _teamName; }
+            set { _teamName = value; }
+        }
+
+        private string _nationality;
+
+        public string Nationality
+        {
+            get { return _nationality; }
+            set { _nationality = value; }
+        }
+
+        public List<Player> players = new List<Player>(); //should this be propfull too?
+    }
+}

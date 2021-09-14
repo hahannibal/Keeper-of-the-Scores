@@ -8,10 +8,8 @@ namespace Keeper_of_the_Scores
 {
     class Score
     {
-        public string team;
-        public Players scorer = new Players();
-        public Players assister = new Players();
+        public Player scorer = new Player();
+        public Player assister = new Player();
         public DateTime dateTime;
-        
     }
 }
