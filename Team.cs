@@ -24,6 +24,13 @@ namespace Keeper_of_the_Scores
             set { _nationality = value; }
         }
 
-        public List<Player> players = new List<Player>(); //should this be propfull too?
+        private List<Player> _players;
+
+        public List<Player> Players
+        {
+            get { return _players; }
+            set { _players = value; }
+        }
+
     }
 }

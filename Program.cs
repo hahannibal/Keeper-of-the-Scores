@@ -16,8 +16,8 @@ namespace Keeper_of_the_Scores
             hungarianPlayer1.Number = 21;
             hungarianPlayer2.Name = "Dani";
             hungarianPlayer2.Number = 17;
-            team1.players.Add(hungarianPlayer1);
-            team1.players.Add(hungarianPlayer2);
+            team1.Players.Add(hungarianPlayer1);
+            team1.Players.Add(hungarianPlayer2);
 
             Team team2 = new Team();
             team2.Nationality = "Austrian";
@@ -28,15 +28,15 @@ namespace Keeper_of_the_Scores
             austrianPlayer1.Number = 07;
             austrianPlayer2.Name = "Levi";
             austrianPlayer2.Number = 13;
-            team2.players.Add(austrianPlayer1);
-            team2.players.Add(austrianPlayer2);
+            team2.Players.Add(austrianPlayer1);
+            team2.Players.Add(austrianPlayer2);
 
             Console.WriteLine($"{team1.TeamName} vs {team2.TeamName}");
 
             Score score = new Score();
 
-            score.Assister = team1.players[0];
-            score.Scorer = team1.players[1];
+            score.Assister = team1.Players[0];
+            score.Scorer = team1.Players[1];
             score.DateTime = DateTime.Now;
 
             List<Score> team1Score = new List<Score>();
