@@ -35,16 +35,16 @@ namespace Keeper_of_the_Scores
 
             Score score = new Score();
 
-            score.assister = team1.players[0];
-            score.scorer = team1.players[1];
-            score.dateTime = DateTime.Now;
+            score.Assister = team1.players[0];
+            score.Scorer = team1.players[1];
+            score.DateTime = DateTime.Now;
 
             List<Score> team1Score = new List<Score>();
             List<Score> team2Score = new List<Score>();
             team1Score.Add(score);
 
-            Console.WriteLine($"Wow! {score.scorer.Name} just made a point with the help of {score.assister.Name} for {team1.TeamName}! The current score is: {team1Score.Count} : {team2Score.Count}");
-            Console.WriteLine($"This happened at {score.dateTime}");
+            Console.WriteLine($"Wow! {score.Scorer.Name} just made a point with the help of {score.Assister.Name} for {team1.TeamName}! The current score is: {team1Score.Count} : {team2Score.Count}");
+            Console.WriteLine($"This happened at {score.DateTime}");
 
         }
     }
