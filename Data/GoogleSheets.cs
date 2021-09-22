@@ -9,6 +9,10 @@ namespace Keeper_of_the_Scores.Data
 {
     class GoogleSheets
     {
+        /// <summary>
+        /// Reads the data from the goolge sheets
+        /// </summary>
+        /// <returns>A list of the teams with the players as Team objects list</returns>
         public static List<Team> ReadData()
         {
             var apikey = File.ReadAllText("C:\\Users\\Tamas Kiss\\Desktop\\KoTS\\apikey.txt");
