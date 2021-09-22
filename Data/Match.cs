@@ -24,20 +24,12 @@ namespace Keeper_of_the_Scores
             set { _team2 = value; }
         }
 
-        private List<Score> _team1Scores;
+        private List<Score> _scores;
 
-        public List<Score> Team1Scores
+        public List<Score> Scores
         {
-            get { return _team1Scores; }
-            set { _team1Scores = value; }
-        }
-
-        private List<Score> _team2Scores;
-
-        public List<Score> Team2Scores
-        {
-            get { return _team2Scores; }
-            set { _team2Scores = value; }
+            get { return _scores; }
+            set { _scores = value; }
         }
 
         private string _refName;

@@ -11,20 +11,10 @@ namespace Keeper_of_the_Scores
     {
         static void Main(string[] args)
         {
-            var apikey = File.ReadAllText("C:\\Users\\Tamas Kiss\\Desktop\\KoTS\\apikey.txt");
-            var service = new SheetsService(new BaseClientService.Initializer
-            {
-                ApplicationName = "Keeper of the Score",
-                ApiKey = apikey,
-            });
+            List<Team> teams = Data.GoogleSheets.ReadData();
+            Console.WriteLine(teams[5].TeamName);
+            Console.WriteLine(teams[5].Players[0].Name);
 
-            SpreadsheetsResource.ValuesResource.GetRequest request = service.Spreadsheets.Values.Get("1CUdylUqw3e3xnD0EYyIbzjwvDpqsIOIlK-edbQjgtOk", "B2:B20");
-            ValueRange response = request.Execute();
-            IList<IList<Object>> values = response.Values;
-            foreach (var row in values)
-            {
-                Console.WriteLine(row[0]);
-            }
         }
     }
 }

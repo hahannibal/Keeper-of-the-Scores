@@ -16,14 +16,6 @@ namespace Keeper_of_the_Scores
             set { _teamName = value; }
         }
 
-        private string _nationality;
-
-        public string Nationality
-        {
-            get { return _nationality; }
-            set { _nationality = value; }
-        }
-
         private List<Player> _players;
 
         public List<Player> Players

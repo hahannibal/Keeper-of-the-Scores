@@ -16,13 +16,14 @@ namespace Keeper_of_the_Scores
             set { _scorer = value; }
         }
 
-        private Player _assister;
+        private Player _assist;
 
-        public Player Assister
+        public Player Assist
         {
-            get { return _scorer; }
-            set { _scorer = value; }
+            get { return _assist; }
+            set { _assist = value; }
         }
+
 
         private DateTime _dateTime;
 
