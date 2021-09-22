@@ -25,9 +25,18 @@ namespace Keeper_of_the_Scores.Data
             var teamNameRequest = service.Spreadsheets.Values.Get("1CUdylUqw3e3xnD0EYyIbzjwvDpqsIOIlK-edbQjgtOk", teamNameRange).Execute().Values;
             var range = $"teams!B2:T30";
             var request = service.Spreadsheets.Values.Get("1CUdylUqw3e3xnD0EYyIbzjwvDpqsIOIlK-edbQjgtOk", range).Execute().Values;
+            var counter = service.Spreadsheets.Values.Get("1CUdylUqw3e3xnD0EYyIbzjwvDpqsIOIlK-edbQjgtOk", $"teams!A30").Execute().Values;
+            int counterNumber = 0; 
+            foreach (var row in counter)
+            {
+                int i =Int32.Parse(row[0] as string);
+                counterNumber = i;
+            }
+            
+            
 
 
-            for (int i = 0; i < 18; i++) //it doesn't read the last team, have to fix it! 
+            for (int i = 0; i < counterNumber; i++) //it doesn't read the last team, have to fix it! 
             {
                 Team newTeam = new Team();
                 newTeam.Players = new List<Player>();
