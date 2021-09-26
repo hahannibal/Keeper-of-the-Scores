@@ -64,7 +64,7 @@ namespace Keeper_of_the_Scores.Data
         /// <summary>
         /// Saving teams to an xml file
         /// </summary>
-        public static void SaveTeams()
+        public static void SaveTeams(List<Team> teams)
         {
             if (File.Exists(_savedTeams) == false)
             {
@@ -72,7 +72,7 @@ namespace Keeper_of_the_Scores.Data
                 filestream.Close();
             }
             var stream = new FileStream(_savedTeams, FileMode.Create);
-            new XmlSerializer(typeof(List<Team>)).Serialize(stream, ReadData());
+            new XmlSerializer(typeof(List<Team>)).Serialize(stream, teams);
             stream.Close();
         }
 
