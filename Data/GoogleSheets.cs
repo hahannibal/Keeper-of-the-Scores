@@ -30,7 +30,7 @@ namespace Keeper_of_the_Scores.Data
             
             var range = $"teams!B2:ZZ";
             var PlayerNames = service.Spreadsheets.Values.Get("1CUdylUqw3e3xnD0EYyIbzjwvDpqsIOIlK-edbQjgtOk", range).Execute().Values;
-            int counter = TeamName[0].Count; //counting the columns;
+            int counter = TeamName[0].Count; //counting the columns to get the number of teams;
             
             for (int i = 0; i < counter; i++) 
             {
