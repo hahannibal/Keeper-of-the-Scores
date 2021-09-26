@@ -28,9 +28,9 @@ namespace Keeper_of_the_Scores.Data
             var teamNameRange = $"teams!B1:1";
             var TeamName = service.Spreadsheets.Values.Get("1CUdylUqw3e3xnD0EYyIbzjwvDpqsIOIlK-edbQjgtOk", teamNameRange).Execute().Values;
             
-            var range = $"teams!B2:AZ";
+            var range = $"teams!B2:ZZ";
             var PlayerNames = service.Spreadsheets.Values.Get("1CUdylUqw3e3xnD0EYyIbzjwvDpqsIOIlK-edbQjgtOk", range).Execute().Values;
-            int counter = TeamName[0].Count - 1; //counting the columns; -1, as the first column is the header
+            int counter = TeamName[0].Count; //counting the columns;
             
             for (int i = 0; i < counter; i++) 
             {
