@@ -7,7 +7,7 @@ using System.IO;
 
 namespace Keeper_of_the_Scores.Data
 {
-    class GoogleSheets
+    public class GoogleSheets
     {
         /// <summary>
         /// Reads the data from the goolge sheets

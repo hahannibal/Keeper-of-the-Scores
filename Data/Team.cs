@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Keeper_of_the_Scores
 {
-    class Team
+    public class Team
     {
         private string _teamName;
 
