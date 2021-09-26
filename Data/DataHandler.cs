@@ -92,7 +92,7 @@ namespace Keeper_of_the_Scores.Data
         }
 
         /// <summary>
-        /// loading matches to savedMatches for adding new ones to the list and to be able to be able to check the history of matches
+        /// loading matches to savedMatches for adding new ones to the list and to be able to check the history of matches
         /// </summary>
         public static void LoadHistory()
         {

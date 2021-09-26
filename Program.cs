@@ -14,6 +14,7 @@ namespace Keeper_of_the_Scores
             List<Team> teams = Data.DataHandler.ReadData();
             Console.WriteLine($"{teams[18].TeamName} vs {teams[1].TeamName}");
             Console.WriteLine($"Wow! {teams[18].Players[0].Name} scored with the help of {teams[18].Players[1].Name}");
+            
 
         }
     }
