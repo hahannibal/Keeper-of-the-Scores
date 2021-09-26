@@ -25,14 +25,14 @@ namespace Keeper_of_the_Scores.Data
 
             List<Team> teams = new List<Team>();
 
-            var teamNameRange = $"teams!1:1";
+            var teamNameRange = $"teams!B1:1";
             var TeamName = service.Spreadsheets.Values.Get("1CUdylUqw3e3xnD0EYyIbzjwvDpqsIOIlK-edbQjgtOk", teamNameRange).Execute().Values;
             
-            var range = $"teams!B2:Z50";
+            var range = $"teams!B2:AZ";
             var PlayerNames = service.Spreadsheets.Values.Get("1CUdylUqw3e3xnD0EYyIbzjwvDpqsIOIlK-edbQjgtOk", range).Execute().Values;
             int counter = TeamName[0].Count - 1; //counting the columns; -1, as the first column is the header
             
-            for (int i = 1; i < counter; i++) 
+            for (int i = 0; i < counter; i++) 
             {
                 Team newTeam = new Team();
 

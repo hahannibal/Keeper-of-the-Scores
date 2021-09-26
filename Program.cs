@@ -12,8 +12,8 @@ namespace Keeper_of_the_Scores
         static void Main(string[] args)
         {
             List<Team> teams = Data.GoogleSheets.ReadData();
-            Console.WriteLine($"{teams[5].TeamName} vs {teams[1].TeamName}");
-            Console.WriteLine($"Wow! {teams[5].Players[1].Name} scored with the help of {teams[5].Players[3].Name}");
+            Console.WriteLine($"{teams[0].TeamName} vs {teams[1].TeamName}");
+            Console.WriteLine($"Wow! {teams[0].Players[0].Name} scored with the help of {teams[0].Players[1].Name}");
 
         }
     }
