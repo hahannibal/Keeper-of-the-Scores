@@ -11,6 +11,7 @@ namespace Keeper_of_the_Scores
     {
         static void Main(string[] args)
         {
+            Data.DataHandler.LoadHistory();
             Match newMatch = new Match();
             List<Team> teams = Data.DataHandler.ReadData();
             Data.DataHandler.SaveTeams(teams);

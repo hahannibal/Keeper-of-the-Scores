@@ -96,11 +96,14 @@ namespace Keeper_of_the_Scores.Data
         /// </summary>
         public static void LoadHistory()
         {
-            XmlSerializer deserializer = new XmlSerializer(typeof(List<Match>));
-            TextReader reader = new StreamReader(_savedMatches);
-            object obj = deserializer.Deserialize(reader);
-            savedMatches = (List<Match>)obj;
-            reader.Close();
+            if (File.Exists(_savedMatches))
+            {
+                XmlSerializer deserializer = new XmlSerializer(typeof(List<Match>));
+                TextReader reader = new StreamReader(_savedMatches);
+                object obj = deserializer.Deserialize(reader);
+                savedMatches = (List<Match>)obj;
+                reader.Close();
+            }
         }
     }
 }
