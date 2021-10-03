@@ -8,6 +8,10 @@ namespace Keeper_of_the_Scores
 {
     public class Player
     {
+        public override string ToString()
+        {
+            return $"{Name}";
+        }
         private string _name;
 
         public string Name

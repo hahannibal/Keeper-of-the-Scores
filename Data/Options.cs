@@ -8,6 +8,10 @@ namespace Keeper_of_the_Scores.Data
 {
     class Options
     {
+        public override string ToString()
+        {
+            return $"Settings!";
+        }
         private string _apiKey;
 
         public string ApiKey

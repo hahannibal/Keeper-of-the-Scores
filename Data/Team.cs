@@ -8,6 +8,10 @@ namespace Keeper_of_the_Scores
 {
     public class Team
     {
+        public override string ToString()
+        {
+            return $"{TeamName}";
+        }
         private string _teamName;
 
         public string TeamName

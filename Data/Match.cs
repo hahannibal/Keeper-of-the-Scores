@@ -8,6 +8,11 @@ namespace Keeper_of_the_Scores
 {
     public class Match
     {
+        public override string ToString()
+        {
+            return $"{Team1} vs {Team2}";
+        }
+
         private Team _team1;
 
         public Team Team1

@@ -8,6 +8,10 @@ namespace Keeper_of_the_Scores
 {
     public class Score
     {
+        public override string ToString()
+        {
+            return $"Scorer:{Scorer}; Assist:{Assist}";
+        }
         private Player _scorer;
 
         public Player Scorer
