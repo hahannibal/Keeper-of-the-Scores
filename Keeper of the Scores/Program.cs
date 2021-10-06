@@ -13,7 +13,7 @@ namespace Keeper_of_the_Scores
         {
             Data.DataHandler.LoadHistory();
             Match newMatch = new Match();
-            List<Team> teams = Data.DataHandler.ReadData();
+            List<Team> teams = Data.DataHandler.TeamList;
             Data.DataHandler.SaveTeams(teams);
             Score newScore = new Score();
             newScore.Scorer = teams[18].Players[0];

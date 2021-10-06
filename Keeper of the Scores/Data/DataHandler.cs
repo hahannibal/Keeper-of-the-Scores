@@ -14,7 +14,7 @@ namespace Keeper_of_the_Scores.Data
         /// Reads the data from the goolge sheets
         /// </summary>
         /// <returns>A list of the teams with the players as Team objects list</returns>
-        public static List<Team> ReadData()
+        public static void ReadData()
         {
             var apikey = File.ReadAllText("C:\\Users\\Tamas Kiss\\Desktop\\KoTS\\apikey.txt");
             var service = new SheetsService(new BaseClientService.Initializer
@@ -55,8 +55,19 @@ namespace Keeper_of_the_Scores.Data
 
 
             }
-            return teams;
+            TeamList = teams;
+            
         }
+
+        private static List<Team> _teamList;
+
+        public static List<Team> TeamList
+        {
+            get { return _teamList; }
+            set { _teamList = value; }
+        }
+
+
         private static string _savedTeams = "Teams.xml";
         private static string _savedMatches = "Matches.xml";
         public static List<Match> savedMatches = new List<Match>();

@@ -1,4 +1,4 @@
-﻿@using Keeper_of_the_Scores;
+﻿
 
 <select @bind="_selectedTeam">
  @foreach(var team in teams)
@@ -9,5 +9,5 @@
 
 @code {
     public string _selectedTeam;
-    List<Team> teams = Keeper_of_the_Scores.Data.DataHandler.ReadData();
-}
+    List<Team> teams = Keeper_of_the_Scores.Data.DataHandler.TeamList;
+      }
