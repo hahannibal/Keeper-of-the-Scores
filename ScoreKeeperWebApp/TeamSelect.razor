@@ -1,13 +1,22 @@
-﻿
+﻿<RadzenDropDown AllowClear="true" TValue="string" Style="width:300px" Data=@(teams.Select(c => c.TeamName).Distinct()) Change=@(args => OnChange(args, "DropDown")) />
 
-<select @bind="_selectedTeam">
- @foreach(var team in teams)
-            {
-                <option>@team.TeamName</option>
-            }
-</select>
+@if (team != null)
+{
+    <ul>
+        @foreach (var player in team.Players)
+        {
+            <li>@player.Name</li>
+        }
+    </ul>
+}
 
-@code {
-    public string _selectedTeam;
+@code
+{
     List<Team> teams = Keeper_of_the_Scores.Data.DataHandler.TeamList;
-      }
+    public string text;
+    public Team team;
+    void OnChange(object value, string name)
+    {
+        team = teams.Find(i => i.TeamName == value);
+    }
+}
