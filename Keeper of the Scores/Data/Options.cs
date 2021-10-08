@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Keeper_of_the_Scores.Data
 {
-    class Options
+    public class Options
     {
         public override string ToString()
         {
@@ -27,23 +27,5 @@ namespace Keeper_of_the_Scores.Data
             get { return _teamSheetsID; }
             set { _teamSheetsID = value; }
         }
-
-        private string _savedTeamFile;
-
-        public string SavedTeamsFile
-        {
-            get { return _savedTeamFile; }
-            set { _savedTeamFile = value; }
-        }
-
-        private string _savedMatchFile;
-
-        public string SavedMatchFile
-        {
-            get { return _savedMatchFile; }
-            set { _savedMatchFile = value; }
-        }
-
-
     }
 }

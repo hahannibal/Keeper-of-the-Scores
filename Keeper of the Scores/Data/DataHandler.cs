@@ -16,7 +16,7 @@ namespace Keeper_of_the_Scores.Data
         /// <returns>A list of the teams with the players as Team objects list</returns>
         public static void ReadData()
         {
-            var apikey = File.ReadAllText("C:\\Users\\Tamas Kiss\\Desktop\\KoTS\\apikey.txt");
+            var apikey = Settings.ApiKey;
             var service = new SheetsService(new BaseClientService.Initializer
             {
                 ApplicationName = "Keeper of the Score",
@@ -27,10 +27,10 @@ namespace Keeper_of_the_Scores.Data
             List<Team> teams = new List<Team>();
 
             var teamNameRange = $"teams!B1:1";
-            var TeamName = service.Spreadsheets.Values.Get("1CUdylUqw3e3xnD0EYyIbzjwvDpqsIOIlK-edbQjgtOk", teamNameRange).Execute().Values;
+            var TeamName = service.Spreadsheets.Values.Get(Settings.TeamSheetsID, teamNameRange).Execute().Values;
             
             var range = $"teams!B2:ZZ";
-            var PlayerNames = service.Spreadsheets.Values.Get("1CUdylUqw3e3xnD0EYyIbzjwvDpqsIOIlK-edbQjgtOk", range).Execute().Values;
+            var PlayerNames = service.Spreadsheets.Values.Get(Settings.TeamSheetsID, range).Execute().Values;
             int counter = TeamName[0].Count; //counting the columns to get the number of teams;
             
             for (int i = 0; i < counter; i++) 
@@ -115,6 +115,25 @@ namespace Keeper_of_the_Scores.Data
                 savedMatches = (List<Match>)obj;
                 reader.Close();
             }
+        }
+
+        private static Options _settings;
+
+        public static Options Settings
+        {
+            get { return _settings; }
+            set { _settings = value; }
+        }
+
+
+        public static void ReadSettings()
+        {
+                XmlSerializer deserializer = new XmlSerializer(typeof(Options));
+                TextReader reader = new StreamReader("C:\\Users\\Tamas Kiss\\source\\repos\\Keeper of the Scores\\ScoreKeeperWebApp\\Settings\\options.xml");
+                object obj = deserializer.Deserialize(reader);
+                _settings = (Options)obj;
+                reader.Close();
+            
         }
     }
 }
