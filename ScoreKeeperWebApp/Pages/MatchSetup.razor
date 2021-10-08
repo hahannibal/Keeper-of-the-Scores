@@ -12,11 +12,23 @@
     <Items>
         <RadzenSelectBarItem Text="OutDoor/7v7" Value="true" />
         <RadzenSelectBarItem Text="InDoor/5v5" Value="false" />
-        </Items>
+    </Items>
 </RadzenSelectBar>
 
-    @code {
-        TeamSelect teamA;
-        TeamSelect teamB;
-        bool inDoor = true;
+<h3 style="margin-top: 2rem">Enter the cap</h3>
+<RadzenNumeric TValue="int" Min="1" Max="15" />
+
+<p><RadzenButton Click=@(args => OnClick()) Text="Start" Style="margin-bottom: 20px; width: 150px" /></p>
+
+@code {
+    public static TeamSelect teamA;
+    public static TeamSelect teamB;
+    bool inDoor = true;
+    public static Match newMatch = new Match();
+
+    public static void OnClick()
+    {
+        newMatch.Team1 = teamA.team;
+        newMatch.Team2 = teamB.team;
     }
+}

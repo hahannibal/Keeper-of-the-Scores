@@ -129,7 +129,7 @@ namespace Keeper_of_the_Scores.Data
         public static void ReadSettings()
         {
                 XmlSerializer deserializer = new XmlSerializer(typeof(Options));
-                TextReader reader = new StreamReader("C:\\Users\\Tamas Kiss\\source\\repos\\Keeper of the Scores\\ScoreKeeperWebApp\\Settings\\options.xml");
+                TextReader reader = new StreamReader("C:\\Users\\Tamas Kiss\\source\\repos\\Keeper of the Scores\\Keeper of the Scores\\bin\\Debug\\net5.0\\settings.xml");
                 object obj = deserializer.Deserialize(reader);
                 _settings = (Options)obj;
                 reader.Close();

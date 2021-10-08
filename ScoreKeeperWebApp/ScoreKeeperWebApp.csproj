@@ -6,7 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Settings\options.xml" />
+    <Compile Remove="Settings\**" />
+    <Content Remove="Settings\**" />
+    <EmbeddedResource Remove="Settings\**" />
+    <None Remove="Settings\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,10 +23,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Keeper of the Scores\Keeper of the Scores.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Settings\" />
   </ItemGroup>
 
 </Project>
