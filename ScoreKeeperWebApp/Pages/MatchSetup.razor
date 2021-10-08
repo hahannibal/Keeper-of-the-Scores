@@ -5,9 +5,18 @@
 <h5>On this page you can set up a new match!</h5>
 <h6>Select the 2 teams:</h6>
 
-<TeamSelect @ref="teamA"></TeamSelect> vs <TeamSelect @ref="teamB"></TeamSelect>
+<p><TeamSelect @ref="teamA"></TeamSelect> vs <TeamSelect @ref="teamB"></TeamSelect></p>
 
-@code {
-    TeamSelect teamA;
-    TeamSelect teamB;
-}
+
+<RadzenSelectBar @bind-Value=@inDoor TValue="bool">
+    <Items>
+        <RadzenSelectBarItem Text="OutDoor/7v7" Value="true" />
+        <RadzenSelectBarItem Text="InDoor/5v5" Value="false" />
+        </Items>
+</RadzenSelectBar>
+
+    @code {
+        TeamSelect teamA;
+        TeamSelect teamB;
+        bool inDoor = true;
+    }
