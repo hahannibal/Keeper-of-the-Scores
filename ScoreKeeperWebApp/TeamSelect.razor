@@ -1,4 +1,4 @@
-﻿<RadzenDropDown AllowClear="true" TValue="string" Style="width:300px" Data=@(teams.Select(c => c.TeamName).Distinct()) Change=@(args => OnChange(args, "DropDown")) />
+﻿<RadzenDropDown AllowClear="true" TValue="string" Style="width:300px" Data=@(teams.Select(c => c.TeamName).Distinct()) Change=@(args => OnChange(args)) />
 
 @if (team != null)
 {
@@ -15,7 +15,7 @@
     List<Team> teams = Keeper_of_the_Scores.Data.DataHandler.TeamList;
     public string text;
     public Team team;
-    void OnChange(object value, string name)
+    void OnChange(object value)
     {
         team = teams.Find(i => i.TeamName == value);
     }
