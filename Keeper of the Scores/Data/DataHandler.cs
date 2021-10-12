@@ -10,6 +10,13 @@ namespace Keeper_of_the_Scores.Data
 {
     public class DataHandler
     {
+
+        public DataHandler()
+        {
+            ReadSettings();
+            ReadData();
+
+        }
         /// <summary>
         /// Reads the data from the goolge sheets
         /// </summary>

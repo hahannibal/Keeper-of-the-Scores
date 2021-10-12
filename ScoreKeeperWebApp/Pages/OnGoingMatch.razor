@@ -1,0 +1,82 @@
+﻿@page "/currentmatch"
+@using ScoreKeeperWebApp.Pages
+
+<h3>OnGoingMatch</h3>
+@TeamSelect.teamA.TeamName
+Scorer:
+<RadzenDropDown AllowClear="true" TValue="string" Style="width:300px" Data=@(playersA.Select(c => c.Name).Distinct()) Change=@(args => OnChangeAScorer(args)) />
+Assist:
+<RadzenDropDown AllowClear="true" TValue="string" Style="width:300px" Data=@(playersA.Select(c => c.Name).Distinct()) Change=@(args => OnChangeAAssist(args)) />
+
+
+
+@TeamSelect.teamB.TeamName
+Scorer:
+<RadzenDropDown AllowClear="true" TValue="string" Style="width:300px" Data=@(playersB.Select(c => c.Name).Distinct()) Change=@(args => OnChangeBScorer(args)) />
+Assist:
+<RadzenDropDown AllowClear="true" TValue="string" Style="width:300px" Data=@(playersB.Select(c => c.Name).Distinct()) Change=@(args => OnChangeBAssist(args)) />
+
+<RadzenButton Click=@(args => AddToScore()) Text="Add" Style="margin-bottom: 20px; width: 150px" />
+
+<RadzenDataGrid @ref="dataGrid" AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" Data="@matchScores" TItem="Score"
+                ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or" Style="height:300px">
+    <Columns>
+        <RadzenDataGridColumn TItem="Score" Property="scorer" Filterable="false" Title="Scorer" Frozen="true" Width="50px" TextAlign="TextAlign.Center" />
+        <RadzenDataGridColumn TItem="Score" Property="scorer" Title="Scorer" Frozen="true">
+            <FooterTemplate>
+                Total points: <b>@matchScores.Count()</b>
+            </FooterTemplate>
+        </RadzenDataGridColumn>
+        <RadzenDataGridColumn TItem="Score" Property="assist" Title="Assist" Width="150px">
+            <FooterTemplate>
+                Footer
+            </FooterTemplate>
+        </RadzenDataGridColumn>
+        <RadzenDataGridColumn TItem="Score" Property="DateTime" Title="Time" />
+
+    </Columns>
+</RadzenDataGrid>
+
+
+@code {
+    RadzenDataGrid<Score> dataGrid;
+    List<Player> playersA = TeamSelect.teamA.Players;
+    List<Player> playersB = TeamSelect.teamB.Players;
+    Player scorer;
+    Player assist;
+    Score score = new Score();
+    List<Score> matchScores = new List<Score>();
+    bool frozen;
+
+    void OnChangeAScorer(object value)
+    {
+        scorer = playersA.Find(i => i.Name == value as string);
+    }
+
+    void OnChangeAAssist(object value)
+    {
+        assist = playersA.Find(i => i.Name == value as string);
+    }
+
+    void OnChangeBScorer(object value)
+    {
+        scorer = playersB.Find(i => i.Name == value);
+    }
+
+    void OnChangeBAssist(object value)
+    {
+        assist = playersB.Find(i => i.Name == value);
+    }
+
+    void AddToScore()
+    {
+        score.Scorer = scorer;
+        score.Assist = assist;
+        score.DateTime = DateTime.Now;
+        //text = $"{score.Scorer} scored with the help of {score.Assist} at {score.DateTime}";
+        matchScores.Add(score);
+        dataGrid.Reload();
+
+    }
+
+}

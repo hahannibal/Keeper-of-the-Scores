@@ -1,0 +1,20 @@
+﻿
+
+
+<h1><button @onclick="ButtonClick">Select!</button></h1>
+
+    @code {
+        [Parameter]
+        public Team TeamSelect { get; set; }
+        [Parameter]
+        public List<Team> TeamList { get; set; }
+        [Parameter]
+        public EventCallback<Team> TeamSelectChanged { get; set; }
+
+        public void ButtonClick()
+        {
+            var rng = new Random();
+            TeamSelectChanged.InvokeAsync(TeamList.OrderBy(i => rng.Next()).ToList().First());
+        }
+
+    }

@@ -1,9 +1,23 @@
-﻿<RadzenDropDown AllowClear="true" TValue="string" Style="width:300px" Data=@(teams.Select(c => c.TeamName).Distinct()) Change=@(args => OnChange(args)) />
+﻿<RadzenDropDown AllowClear="true" TValue="string" Style="width:300px" Data=@(teams.Select(c => c.TeamName).Distinct()) Change=@(args => OnChangeA(args)) />
 
-@if (team != null)
+@if (teamA != null)
 {
     <ul>
-        @foreach (var player in team.Players)
+        @foreach (var player in teamA.Players)
+        {
+            <li>@player.Name</li>
+        }
+    </ul>
+}
+
+vs
+
+<RadzenDropDown AllowClear="true" TValue="string" Style="width:300px" Data=@(teams.Select(c => c.TeamName).Distinct()) Change=@(args => OnChangeB(args)) />
+
+@if (teamB != null)
+{
+    <ul>
+        @foreach (var player in teamB.Players)
         {
             <li>@player.Name</li>
         }
@@ -13,10 +27,14 @@
 @code
 {
     List<Team> teams = Keeper_of_the_Scores.Data.DataHandler.TeamList;
-    public string text;
-    public Team team;
-    void OnChange(object value)
+    public static Team teamA;
+    public static Team teamB;
+    void OnChangeA(object value)
     {
-        team = teams.Find(i => i.TeamName == value);
+        teamA = teams.Find(i => i.TeamName == value);
+    }
+    void OnChangeB(object value)
+    {
+        teamB = teams.Find(i => i.TeamName == value);
     }
 }

@@ -1,11 +1,12 @@
 ﻿@page "/matchsetup"
+@using Shared 
+@inject NavigationManager UriHelper
 
-<h1>Match Setup</h1>
-
+<h1>Match Setup: </h1>
 <h5>On this page you can set up a new match!</h5>
 <h6>Select the 2 teams:</h6>
 
-<p><TeamSelect @ref="teamA"></TeamSelect> vs <TeamSelect @ref="teamB"></TeamSelect></p>
+<div><TeamSelect></TeamSelect></div>
 
 
 <RadzenSelectBar @bind-Value=@inDoor TValue="bool">
@@ -18,17 +19,15 @@
 <h3 style="margin-top: 2rem">Enter the cap</h3>
 <RadzenNumeric TValue="int" Min="1" Max="15" />
 
-<p><RadzenButton Click=@(args => OnClick()) Text="Start" Style="margin-bottom: 20px; width: 150px" /></p>
+<p><RadzenButton Click=@(args => Navigate()) Text="Start" Style="margin-bottom: 20px; width: 150px" /></p>
 
 @code {
-    public static TeamSelect teamA;
-    public static TeamSelect teamB;
     bool inDoor = true;
     public static Match newMatch = new Match();
 
-    public static void OnClick()
+    void Navigate()
     {
-        newMatch.Team1 = teamA.team;
-        newMatch.Team2 = teamB.team;
+        UriHelper.NavigateTo("currentmatch");
     }
+
 }
