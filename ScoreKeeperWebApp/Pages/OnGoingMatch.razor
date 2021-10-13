@@ -1,8 +1,8 @@
 ﻿@page "/currentmatch"
-@using ScoreKeeperWebApp.Pages
+
 
 <h3>OnGoingMatch</h3>
-@TeamSelect.teamA.TeamName
+@currentMatch.Team1.TeamName
 Scorer:
 <RadzenDropDown AllowClear="true" TValue="string" Style="width:300px" Data=@(playersA.Select(c => c.Name).Distinct()) Change=@(args => OnChangeAScorer(args)) />
 Assist:
@@ -34,7 +34,9 @@ Assist:
 
 @code {
     RadzenDataGrid<Score> dataGrid;
-    List<Player> playersA = TeamSelect.teamA.Players;
+    public static Match currentMatch = MatchSetup.currentMatch;
+    List<Player> playersA = currentMatch.Team1.Players;
+    List<Player> playersB = currentMatch.Team2.Players;
     Player scorer;
     Player assist;
     Score score = new Score();

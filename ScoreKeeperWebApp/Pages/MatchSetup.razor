@@ -5,7 +5,7 @@
 <h5>On this page you can set up a new match!</h5>
 <h6>Select the 2 teams:</h6>
 
-<div><TeamSelect></TeamSelect></div>
+<div><TeamSelect TeamList="@Keeper_of_the_Scores.Data.DataHandler.TeamList" @bind-SelectedTeam="teamA"></TeamSelect> vs <TeamSelect TeamList="@Keeper_of_the_Scores.Data.DataHandler.TeamList" @bind-SelectedTeam="teamB"></TeamSelect></div> 
 
 
 <RadzenSelectBar @bind-Value=@inDoor TValue="bool">
@@ -21,11 +21,17 @@
 <p><RadzenButton Click=@(args => Navigate()) Text="Start" Style="margin-bottom: 20px; width: 150px" /></p>
 
 @code {
+    public static Team teamA;
+    public static Team teamB;
     bool inDoor = true;
-    public static Match newMatch = new Match();
+    public static Match currentMatch = new Match();
 
     void Navigate()
     {
+        currentMatch.Team1 = teamA;
+        currentMatch.Team2 = teamB;
+        currentMatch.Scores = new List<Score>();
+        currentMatch.RefName = "Tamas";
         UriHelper.NavigateTo("currentmatch");
     }
 

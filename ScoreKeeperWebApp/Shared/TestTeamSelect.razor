@@ -1,7 +1,5 @@
-﻿
+﻿<RadzenDropDown AllowClear="true" TValue="string" Style="width:300px" Data=@(TeamList.Select(c => c.TeamName).Distinct()) Change=@(args => OnChange(args)) />
 
-
-<h1><button @onclick="ButtonClick">Select!</button></h1>
 
     @code {
         [Parameter]
@@ -11,10 +9,9 @@
         [Parameter]
         public EventCallback<Team> TeamSelectChanged { get; set; }
 
-        public void ButtonClick()
+        public void OnChange(object value)
         {
-            var rng = new Random();
-            TeamSelectChanged.InvokeAsync(TeamList.OrderBy(i => rng.Next()).ToList().First());
+            TeamSelectChanged.InvokeAsync(TeamList.Find(i => i.TeamName == value as string));
         }
 
     }

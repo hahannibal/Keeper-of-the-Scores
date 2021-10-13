@@ -1,40 +1,17 @@
-﻿<RadzenDropDown AllowClear="true" TValue="string" Style="width:300px" Data=@(teams.Select(c => c.TeamName).Distinct()) Change=@(args => OnChangeA(args)) />
+﻿<RadzenDropDown AllowClear="true" TValue="string" Style="width:300px" Data=@(TeamList.Select(c => c.TeamName).Distinct()) Change=@(args => OnChange(args)) />
 
-@if (teamA != null)
-{
-    <ul>
-        @foreach (var player in teamA.Players)
-        {
-            <li>@player.Name</li>
-        }
-    </ul>
-}
 
-vs
+@code {
+    [Parameter]
+    public Team SelectedTeam { get; set; }
+    [Parameter]
+    public List<Team> TeamList { get; set; }
+    [Parameter]
+    public EventCallback<Team> SelectedTeamChanged { get; set; }
 
-<RadzenDropDown AllowClear="true" TValue="string" Style="width:300px" Data=@(teams.Select(c => c.TeamName).Distinct()) Change=@(args => OnChangeB(args)) />
-
-@if (teamB != null)
-{
-    <ul>
-        @foreach (var player in teamB.Players)
-        {
-            <li>@player.Name</li>
-        }
-    </ul>
-}
-
-@code
-{
-    List<Team> teams = Keeper_of_the_Scores.Data.DataHandler.TeamList;
-    public static Team teamA;
-    public static Team teamB;
-    void OnChangeA(object value)
+    public void OnChange(object value)
     {
-        teamA = teams.Find(i => i.TeamName == value as string);
+        SelectedTeamChanged.InvokeAsync(TeamList.Find(i => i.TeamName == value as string));
     }
-    void OnChangeB(object value)
-    {
-        teamB = teams.Find(i => i.TeamName == value as string);
-    }
+
 }
