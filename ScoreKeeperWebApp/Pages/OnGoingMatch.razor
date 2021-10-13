@@ -2,7 +2,7 @@
 @using ScoreKeeperWebApp.Pages
 
 <h3>OnGoingMatch</h3>
-@TeamSelect.SelectedTeam.TeamName
+@TeamSelect.teamA.TeamName
 Scorer:
 <RadzenDropDown AllowClear="true" TValue="string" Style="width:300px" Data=@(playersA.Select(c => c.Name).Distinct()) Change=@(args => OnChangeAScorer(args)) />
 Assist:
@@ -34,7 +34,7 @@ Assist:
 
 @code {
     RadzenDataGrid<Score> dataGrid;
-    List<Player> playersA = TeamSelect.SelectedTeam.Players;
+    List<Player> playersA = TeamSelect.teamA.Players;
     Player scorer;
     Player assist;
     Score score = new Score();
