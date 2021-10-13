@@ -4,9 +4,15 @@
 <h3>OnGoingMatch</h3>
 @currentMatch.Team1.TeamName
 Scorer:
-<RadzenDropDown AllowClear="true" TValue="string" Style="width:300px" Data=@(playersA.Select(c => c.Name).Distinct()) Change=@(args => OnChangeAScorer(args)) />
+<PlayerSelect PlayerList="playersA" @bind-SelectedPlayer="scorer"></PlayerSelect>
 Assist:
-<RadzenDropDown AllowClear="true" TValue="string" Style="width:300px" Data=@(playersA.Select(c => c.Name).Distinct()) Change=@(args => OnChangeAAssist(args)) />
+<PlayerSelect PlayerList="playersA" @bind-SelectedPlayer="assist"></PlayerSelect>
+
+@currentMatch.Team2.TeamName
+Scorer:
+<PlayerSelect PlayerList="playersB" @bind-SelectedPlayer="scorer"></PlayerSelect>
+Assist:
+<PlayerSelect PlayerList="playersB" @bind-SelectedPlayer="assist"></PlayerSelect>
 
 
 
