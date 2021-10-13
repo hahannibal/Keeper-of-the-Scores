@@ -15,7 +15,6 @@ namespace Keeper_of_the_Scores.Data
         {
             ReadSettings();
             ReadData();
-
         }
         /// <summary>
         /// Reads the data from the goolge sheets

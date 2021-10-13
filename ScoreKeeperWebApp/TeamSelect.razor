@@ -31,10 +31,10 @@ vs
     public static Team teamB;
     void OnChangeA(object value)
     {
-        teamA = teams.Find(i => i.TeamName == value);
+        teamA = teams.Find(i => i.TeamName == value as string);
     }
     void OnChangeB(object value)
     {
-        teamB = teams.Find(i => i.TeamName == value);
+        teamB = teams.Find(i => i.TeamName == value as string);
     }
 }

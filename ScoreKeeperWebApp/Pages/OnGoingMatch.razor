@@ -2,19 +2,13 @@
 @using ScoreKeeperWebApp.Pages
 
 <h3>OnGoingMatch</h3>
-@TeamSelect.teamA.TeamName
+@TeamSelect.SelectedTeam.TeamName
 Scorer:
 <RadzenDropDown AllowClear="true" TValue="string" Style="width:300px" Data=@(playersA.Select(c => c.Name).Distinct()) Change=@(args => OnChangeAScorer(args)) />
 Assist:
 <RadzenDropDown AllowClear="true" TValue="string" Style="width:300px" Data=@(playersA.Select(c => c.Name).Distinct()) Change=@(args => OnChangeAAssist(args)) />
 
 
-
-@TeamSelect.teamB.TeamName
-Scorer:
-<RadzenDropDown AllowClear="true" TValue="string" Style="width:300px" Data=@(playersB.Select(c => c.Name).Distinct()) Change=@(args => OnChangeBScorer(args)) />
-Assist:
-<RadzenDropDown AllowClear="true" TValue="string" Style="width:300px" Data=@(playersB.Select(c => c.Name).Distinct()) Change=@(args => OnChangeBAssist(args)) />
 
 <RadzenButton Click=@(args => AddToScore()) Text="Add" Style="margin-bottom: 20px; width: 150px" />
 
@@ -40,8 +34,7 @@ Assist:
 
 @code {
     RadzenDataGrid<Score> dataGrid;
-    List<Player> playersA = TeamSelect.teamA.Players;
-    List<Player> playersB = TeamSelect.teamB.Players;
+    List<Player> playersA = TeamSelect.SelectedTeam.Players;
     Player scorer;
     Player assist;
     Score score = new Score();
@@ -56,16 +49,6 @@ Assist:
     void OnChangeAAssist(object value)
     {
         assist = playersA.Find(i => i.Name == value as string);
-    }
-
-    void OnChangeBScorer(object value)
-    {
-        scorer = playersB.Find(i => i.Name == value);
-    }
-
-    void OnChangeBAssist(object value)
-    {
-        assist = playersB.Find(i => i.Name == value);
     }
 
     void AddToScore()
