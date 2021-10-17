@@ -1,4 +1,4 @@
-﻿<RadzenDropDown AllowClear="true" TValue="string" Style="width:300px" Data=@(PlayerList.Select(c => c.Name).Distinct()) Change=@(args => OnChange(args)) />
+﻿<RadzenDropDown AllowClear="true" TValue="Player" Style="width:300px" Data="PlayerList" Change=@(args => OnChange(args)) />
 
 @code {
     [Parameter]
@@ -10,6 +10,6 @@
 
     public void OnChange(object value)
     {
-        SelectedPlayerChanged.InvokeAsync(PlayerList.Find(i => i.Name == value as string));
+        SelectedPlayerChanged.InvokeAsync(value as Player);
     }
 }
