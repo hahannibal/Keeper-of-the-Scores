@@ -13,9 +13,6 @@ namespace ScoreKeeperWebApp
     {
         public static void Main(string[] args)
         {
-            Keeper_of_the_Scores.Data.DataHandler.ReadSettings();
-            Keeper_of_the_Scores.Data.DataHandler.ReadData();
-
             CreateHostBuilder(args).Build().Run();
             
         }

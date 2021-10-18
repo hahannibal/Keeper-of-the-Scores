@@ -1,5 +1,5 @@
 ﻿@page "/currentmatch"
-
+@inject NavigationManager UriHelper
 
 <h3>OnGoingMatch</h3>
 @currentMatch.Team1.TeamName
@@ -8,34 +8,31 @@ Scorer:
 Assist:
 <PlayerSelect PlayerList="playersA" @bind-SelectedPlayer="assist"></PlayerSelect>
 
+<RadzenButton Click=@(args => AddToScore()) Text="Add" Style="margin-bottom: 20px; width: 150px" />
+
 @currentMatch.Team2.TeamName
 Scorer:
 <PlayerSelect PlayerList="playersB" @bind-SelectedPlayer="scorer"></PlayerSelect>
 Assist:
 <PlayerSelect PlayerList="playersB" @bind-SelectedPlayer="assist"></PlayerSelect>
 
-
-
 <RadzenButton Click=@(args => AddToScore()) Text="Add" Style="margin-bottom: 20px; width: 150px" />
 
 <RadzenDataGrid @ref="dataGrid" AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" Data="@matchScores" TItem="Score"
                 ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or" Style="height:300px">
     <Columns>
-        <RadzenDataGridColumn TItem="Score" Property="scorer" Filterable="false" Title="Scorer" Frozen="true" Width="50px" TextAlign="TextAlign.Center" />
-        <RadzenDataGridColumn TItem="Score" Property="scorer" Title="Scorer" Frozen="true">
+        <RadzenDataGridColumn TItem="Score" Property="DateTime" Title="Time" />
+        <RadzenDataGridColumn TItem="Score" Property="scorer" Title="Score and Assist" Frozen="true" >
             <FooterTemplate>
                 Total points: <b>@matchScores.Count()</b>
             </FooterTemplate>
         </RadzenDataGridColumn>
-        <RadzenDataGridColumn TItem="Score" Property="assist" Title="Assist" Width="150px">
-            <FooterTemplate>
-                Footer
-            </FooterTemplate>
-        </RadzenDataGridColumn>
-        <RadzenDataGridColumn TItem="Score" Property="DateTime" Title="Time" />
 
     </Columns>
 </RadzenDataGrid>
+
+<RadzenButton Click=@(args => RemoveLast()) Text="Undo" Style="margin-bottom: 20px; width: 150px" />
+<RadzenButton Click=@(args => MatchOver()) Text="Match Over" Style="margin-bottom: 20px; width: 150px" />
 
 
 @code {
@@ -45,7 +42,6 @@ Assist:
     List<Player> playersB = currentMatch.Team2.Players;
     Player scorer;
     Player assist;
-    Score score = new Score();
     List<Score> matchScores = new List<Score>();
     bool frozen;
 
@@ -61,12 +57,28 @@ Assist:
 
     void AddToScore()
     {
+        Score score = new Score();
         score.Scorer = scorer;
         score.Assist = assist;
         score.DateTime = DateTime.Now;
-        //text = $"{score.Scorer} scored with the help of {score.Assist} at {score.DateTime}";
-        matchScores.Add(score);
+        currentMatch.Scores.Add(score);
         dataGrid.Reload();
+
+
+
+    }
+
+    void RemoveLast()
+    {
+        matchScores.RemoveAt(matchScores.Count - 1);
+        dataGrid.Reload();
+    }
+
+    void MatchOver()
+    {
+        Keeper_of_the_Scores.Data.DataHandler.savedMatches.Add(currentMatch);
+
+        UriHelper.NavigateTo("/");
 
     }
 

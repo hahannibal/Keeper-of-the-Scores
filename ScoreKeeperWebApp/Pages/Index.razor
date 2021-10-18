@@ -1,15 +1,4 @@
 ﻿@page "/"
-@using Shared
 
 <h1>Live matches</h1>
-<TestTeamSelect TeamList="@Keeper_of_the_Scores.Data.DataHandler.TeamList" @bind-TeamSelect="team"></TestTeamSelect>
 
-@if (team != null)
-{
-    @team.TeamName
-}
-
-
-@code{
-    public Team team;
-}

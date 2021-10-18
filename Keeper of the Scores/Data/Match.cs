@@ -45,5 +45,14 @@ namespace Keeper_of_the_Scores
             set { _refName = value; }
         }
 
+        private bool _inDoor;
+
+        public bool InDoor
+        {
+            get { return _inDoor; }
+            set { _inDoor = value; }
+        }
+
+
     }
 }
