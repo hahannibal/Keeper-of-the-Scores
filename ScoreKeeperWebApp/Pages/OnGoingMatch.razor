@@ -8,7 +8,7 @@ Scorer:
 Assist:
 <PlayerSelect PlayerList="playersA" @bind-SelectedPlayer="assist"></PlayerSelect>
 
-<RadzenButton Click=@(args => AddToScore()) Text="Add" Style="margin-bottom: 20px; width: 150px" />
+<RadzenButton Click=@(args => AddToScoreA()) Text="Add" Style="margin-bottom: 20px; width: 150px" />
 
 @currentMatch.Team2.TeamName
 Scorer:
@@ -16,17 +16,18 @@ Scorer:
 Assist:
 <PlayerSelect PlayerList="playersB" @bind-SelectedPlayer="assist"></PlayerSelect>
 
-<RadzenButton Click=@(args => AddToScore()) Text="Add" Style="margin-bottom: 20px; width: 150px" />
+<RadzenButton Click=@(args => AddToScoreB()) Text="Add" Style="margin-bottom: 20px; width: 150px" />
 
-<RadzenDataGrid @ref="dataGrid" AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" Data="@matchScores" TItem="Score"
+<RadzenDataGrid @ref="dataGrid" AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" Data="@currentMatch.Scores" TItem="Score"
                 ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or" Style="height:300px">
     <Columns>
         <RadzenDataGridColumn TItem="Score" Property="DateTime" Title="Time" />
-        <RadzenDataGridColumn TItem="Score" Property="scorer" Title="Score and Assist" Frozen="true" >
+        <RadzenDataGridColumn TItem="Score" Property="Scorer" Title="Scorer" Frozen="true">
             <FooterTemplate>
-                Total points: <b>@matchScores.Count()</b>
+                Points: <b>@scoreTeam1</b> vs <b>@scoreTeam2</b>
             </FooterTemplate>
         </RadzenDataGridColumn>
+        <RadzenDataGridColumn TItem="Score" Property="Assist" Title="Assist" Frozen="true" />
 
     </Columns>
 </RadzenDataGrid>
@@ -42,35 +43,35 @@ Assist:
     List<Player> playersB = currentMatch.Team2.Players;
     Player scorer;
     Player assist;
-    List<Score> matchScores = new List<Score>();
-    bool frozen;
+    int count = currentMatch.Scores.Count();
+    int scoreTeam1 = currentMatch.Scores.Where(Score => (Score.ScoringTeam == currentMatch.Team1)).ToList().Count;
+    int scoreTeam2 = currentMatch.Scores.Where(Score => (Score.ScoringTeam == currentMatch.Team2)).ToList().Count;
 
-    void OnChangeAScorer(object value)
-    {
-        scorer = playersA.Find(i => i.Name == value as string);
-    }
-
-    void OnChangeAAssist(object value)
-    {
-        assist = playersA.Find(i => i.Name == value as string);
-    }
-
-    void AddToScore()
+    void AddToScoreA()
     {
         Score score = new Score();
+        score.ScoringTeam = currentMatch.Team1;
         score.Scorer = scorer;
         score.Assist = assist;
         score.DateTime = DateTime.Now;
         currentMatch.Scores.Add(score);
         dataGrid.Reload();
+    }
 
-
-
+    void AddToScoreB()
+    {
+        Score score = new Score();
+        score.ScoringTeam = currentMatch.Team2;
+        score.Scorer = scorer;
+        score.Assist = assist;
+        score.DateTime = DateTime.Now;
+        currentMatch.Scores.Add(score);
+        dataGrid.Reload();
     }
 
     void RemoveLast()
     {
-        matchScores.RemoveAt(matchScores.Count - 1);
+        currentMatch.Scores.RemoveAt(currentMatch.Scores.Count - 1);
         dataGrid.Reload();
     }
 
