@@ -13,8 +13,9 @@ namespace Keeper_of_the_Scores.Data
 
         public DataHandler()
         {
-            ReadSettings();
-            ReadData();
+            //ReadSettings();
+            //ReadData();
+            LoadTeams();
         }
         /// <summary>
         /// Reads the data from the goolge sheets
@@ -140,6 +141,14 @@ namespace Keeper_of_the_Scores.Data
                 _settings = (Options)obj;
                 reader.Close();
             
+        }
+        public static void LoadTeams()
+        {
+            XmlSerializer deserializer = new XmlSerializer(typeof(List<Team>));
+            TextReader reader = new StreamReader("C:\\Users\\Tamas Kiss\\source\\repos\\Keeper of the Scores\\bin\\Debug\\net5.0\\Teams.xml");
+            object obj = deserializer.Deserialize(reader);
+            _teamList = (List<Team>)obj;
+            reader.Close();
         }
     }
 }
