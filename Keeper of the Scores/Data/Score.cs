@@ -8,14 +8,6 @@ namespace Keeper_of_the_Scores
 {
     public class Score
     {
-        private Team _scoringTeam;
-
-        public Team ScoringTeam
-        {
-            get { return _scoringTeam; }
-            set { _scoringTeam = value; }
-        }
-
         public override string ToString()
         {
             return $"Scorer:{Scorer}; Assist:{Assist}";

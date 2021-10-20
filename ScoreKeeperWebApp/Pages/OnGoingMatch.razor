@@ -47,7 +47,6 @@ Assist:
     void AddToScoreA()
     {
         Score score = new Score();
-        score.ScoringTeam = currentMatch.Team1;
         score.Scorer = scorer;
         score.Assist = assist;
         score.DateTime = DateTime.Now;
@@ -58,7 +57,6 @@ Assist:
     void AddToScoreB()
     {
         Score score = new Score();
-        score.ScoringTeam = currentMatch.Team2;
         score.Scorer = scorer;
         score.Assist = assist;
         score.DateTime = DateTime.Now;
