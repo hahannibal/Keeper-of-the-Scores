@@ -24,7 +24,7 @@ Assist:
         <RadzenDataGridColumn TItem="Score" Property="DateTime" Title="Time" />
         <RadzenDataGridColumn TItem="Score" Property="Scorer" Title="Scorer" Frozen="true">
             <FooterTemplate>
-                Points: <b>@scoreTeam1</b> vs <b>@scoreTeam2</b>
+                Points: <b>@currentMatch.Scores.Where(Score => (currentMatch.Team1.Players.Contains(Score.Scorer))).ToList().Count</b> vs <b>@currentMatch.Scores.Where(Score => (currentMatch.Team2.Players.Contains(Score.Scorer))).ToList().Count</b>
             </FooterTemplate>
         </RadzenDataGridColumn>
         <RadzenDataGridColumn TItem="Score" Property="Assist" Title="Assist" Frozen="true" />
@@ -43,9 +43,6 @@ Assist:
     List<Player> playersB = currentMatch.Team2.Players;
     Player scorer;
     Player assist;
-    int count = currentMatch.Scores.Count();
-    int scoreTeam1 = currentMatch.Scores.Where(Score => (Score.ScoringTeam == currentMatch.Team1)).ToList().Count;
-    int scoreTeam2 = currentMatch.Scores.Where(Score => (Score.ScoringTeam == currentMatch.Team2)).ToList().Count;
 
     void AddToScoreA()
     {
