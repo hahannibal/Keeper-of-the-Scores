@@ -136,7 +136,7 @@ namespace Keeper_of_the_Scores.Data
         public static void ReadSettings()
         {
                 XmlSerializer deserializer = new XmlSerializer(typeof(Options));
-                TextReader reader = new StreamReader("C:\\Users\\Tamas Kiss\\source\\repos\\Keeper of the Scores\\Keeper of the Scores\\bin\\Debug\\net5.0\\settings.xml");
+                TextReader reader = new StreamReader("..\\ScoreKeeperWebApp\\Data\\XML\\settings.xml");
                 object obj = deserializer.Deserialize(reader);
                 _settings = (Options)obj;
                 reader.Close();
@@ -145,7 +145,7 @@ namespace Keeper_of_the_Scores.Data
         public static void LoadTeams()
         {
             XmlSerializer deserializer = new XmlSerializer(typeof(List<Team>));
-            TextReader reader = new StreamReader("C:\\Users\\Tamas Kiss\\source\\repos\\Keeper of the Scores\\bin\\Debug\\net5.0\\Teams.xml");
+            TextReader reader = new StreamReader("..\\ScoreKeeperWebApp\\Data\\XML\\Teams.xml");
             object obj = deserializer.Deserialize(reader);
             _teamList = (List<Team>)obj;
             reader.Close();

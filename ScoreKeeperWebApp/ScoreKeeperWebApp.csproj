@@ -25,4 +25,8 @@
     <ProjectReference Include="..\Keeper of the Scores\Keeper of the Scores.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\XML\" />
+  </ItemGroup>
+
 </Project>
