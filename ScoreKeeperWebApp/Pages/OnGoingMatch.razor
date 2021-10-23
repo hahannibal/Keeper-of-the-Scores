@@ -4,17 +4,17 @@
 <h3>OnGoingMatch</h3>
 @currentMatch.Team1.TeamName
 Scorer:
-<PlayerSelect PlayerList="playersA" @bind-SelectedPlayer="scorer"></PlayerSelect>
+<PlayerSelect @ref="playerA" PlayerList="playersA" @bind-SelectedPlayer="scorer"></PlayerSelect>
 Assist:
-<PlayerSelect PlayerList="playersA" @bind-SelectedPlayer="assist"></PlayerSelect>
+<PlayerSelect @ref="playerB" PlayerList="playersA" @bind-SelectedPlayer="assist"></PlayerSelect>
 
 <RadzenButton Click=@(args => AddToScoreA()) Text="Add" Style="margin-bottom: 20px; width: 150px" />
 
 @currentMatch.Team2.TeamName
 Scorer:
-<PlayerSelect PlayerList="playersB" @bind-SelectedPlayer="scorer"></PlayerSelect>
+<PlayerSelect @ref="playerC" PlayerList="playersB" @bind-SelectedPlayer="scorer"></PlayerSelect>
 Assist:
-<PlayerSelect PlayerList="playersB" @bind-SelectedPlayer="assist"></PlayerSelect>
+<PlayerSelect @ref="playerD" PlayerList="playersB" @bind-SelectedPlayer="assist"></PlayerSelect>
 
 <RadzenButton Click=@(args => AddToScoreB()) Text="Add" Style="margin-bottom: 20px; width: 150px" />
 
@@ -38,6 +38,10 @@ Assist:
 
 @code {
     RadzenDataGrid<Score> dataGrid;
+    PlayerSelect playerA;
+    PlayerSelect playerB;
+    PlayerSelect playerC;
+    PlayerSelect playerD;
     public static Match currentMatch = MatchSetup.currentMatch;
     List<Player> playersA = currentMatch.Team1.Players;
     List<Player> playersB = currentMatch.Team2.Players;
@@ -46,22 +50,43 @@ Assist:
 
     void AddToScoreA()
     {
-        Score score = new Score();
-        score.Scorer = scorer;
-        score.Assist = assist;
-        score.DateTime = DateTime.Now;
-        currentMatch.Scores.Add(score);
-        dataGrid.Reload();
+        if (scorer != null)
+        {
+            Score score = new Score();
+            score.Scorer = scorer;
+            score.Assist = assist;
+            score.DateTime = DateTime.Now;
+            currentMatch.Scores.Add(score);
+            dataGrid.Reload();
+            RemoveSelect();
+        }
+
+
+
     }
 
     void AddToScoreB()
     {
-        Score score = new Score();
-        score.Scorer = scorer;
-        score.Assist = assist;
-        score.DateTime = DateTime.Now;
-        currentMatch.Scores.Add(score);
-        dataGrid.Reload();
+        if (scorer != null)
+        {
+            Score score = new Score();
+            score.Scorer = scorer;
+            score.Assist = assist;
+            score.DateTime = DateTime.Now;
+            currentMatch.Scores.Add(score);
+            dataGrid.Reload();
+            RemoveSelect();
+        }
+
+
+    }
+
+    void RemoveSelect()
+    {
+        playerA.SelectedPlayer.Name = null;
+        playerB.SelectedPlayer.Name = null;
+        playerC.SelectedPlayer.Name = null;
+        playerD.SelectedPlayer.Name = null;
     }
 
     void RemoveLast()

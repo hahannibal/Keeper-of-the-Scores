@@ -17,11 +17,30 @@ namespace Keeper_of_the_Scores.Data
             //ReadData();
             LoadTeams();
         }
+
+        private Options _settings;
+        public Options Settings
+        {
+            get { return _settings; }
+            set { _settings = value; }
+        }
+
+        private static List<Team> _teamList;
+
+        public static List<Team> TeamList
+        {
+            get { return _teamList; }
+            set { _teamList = value; }
+        }
+        private string _savedTeams = "Teams.xml";
+        private string _savedMatches = "Matches.xml";
+        public static List<Match> savedMatches = new List<Match>();
+
         /// <summary>
         /// Reads the data from the goolge sheets
         /// </summary>
         /// <returns>A list of the teams with the players as Team objects list</returns>
-        public static void ReadData()
+        public void ReadData()
         {
             var apikey = Settings.ApiKey;
             var service = new SheetsService(new BaseClientService.Initializer
@@ -66,23 +85,10 @@ namespace Keeper_of_the_Scores.Data
             
         }
 
-        private static List<Team> _teamList;
-
-        public static List<Team> TeamList
-        {
-            get { return _teamList; }
-            set { _teamList = value; }
-        }
-
-
-        private static string _savedTeams = "Teams.xml";
-        private static string _savedMatches = "Matches.xml";
-        public static List<Match> savedMatches = new List<Match>();
-
         /// <summary>
         /// Saving teams to an xml file
         /// </summary>
-        public static void SaveTeams(List<Team> teams)
+        public void SaveTeams(List<Team> teams)
         {
             if (File.Exists(_savedTeams) == false)
             {
@@ -97,7 +103,7 @@ namespace Keeper_of_the_Scores.Data
         /// <summary>
         /// saving matches to an xml file
         /// </summary>
-        public static void SaveMatches()
+        public void SaveMatches()
         {
             if (File.Exists(_savedMatches) == false)
             {
@@ -112,7 +118,7 @@ namespace Keeper_of_the_Scores.Data
         /// <summary>
         /// loading matches to savedMatches for adding new ones to the list and to be able to check the history of matches
         /// </summary>
-        public static void LoadHistory()
+        public void LoadHistory()
         {
             if (File.Exists(_savedMatches))
             {
@@ -124,16 +130,13 @@ namespace Keeper_of_the_Scores.Data
             }
         }
 
-        private static Options _settings;
-
-        public static Options Settings
-        {
-            get { return _settings; }
-            set { _settings = value; }
-        }
 
 
-        public static void ReadSettings()
+        /// <summary>
+        /// reading the settings/api key
+        /// </summary>
+
+        public void ReadSettings()
         {
                 XmlSerializer deserializer = new XmlSerializer(typeof(Options));
                 TextReader reader = new StreamReader("..\\ScoreKeeperWebApp\\Data\\XML\\settings.xml");
@@ -142,7 +145,11 @@ namespace Keeper_of_the_Scores.Data
                 reader.Close();
             
         }
-        public static void LoadTeams()
+
+        /// <summary>
+        /// Loading saved teams from XML file
+        /// </summary>
+        public void LoadTeams()
         {
             XmlSerializer deserializer = new XmlSerializer(typeof(List<Team>));
             TextReader reader = new StreamReader("..\\ScoreKeeperWebApp\\Data\\XML\\Teams.xml");
