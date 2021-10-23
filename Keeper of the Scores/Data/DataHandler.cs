@@ -18,6 +18,15 @@ namespace Keeper_of_the_Scores.Data
             LoadTeams();
         }
 
+        private static Match _currentMatch;
+
+        public static Match CurrentMatch
+        {
+            get { return _currentMatch; }
+            set { _currentMatch = value; }
+        }
+
+
         private Options _settings;
         public Options Settings
         {
