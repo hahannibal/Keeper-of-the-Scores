@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Keeper_of_the_Scores
+namespace ScoreKeeperWebApp
 {
     public class Team
     {

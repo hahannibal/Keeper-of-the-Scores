@@ -1,12 +1,12 @@
 ﻿@page "/matchsetup"
 @inject NavigationManager UriHelper
-@inject Keeper_of_the_Scores.Data.DataHandler DataHandler
+@inject Data.DataHandler DataHandler
 
 <h1>Match Setup: </h1>
 <h5>On this page you can set up a new match!</h5>
 <h6>Select the 2 teams:</h6>
 
-<div><TeamSelect TeamList="@Keeper_of_the_Scores.Data.DataHandler.TeamList" @bind-SelectedTeam="teamA"></TeamSelect> vs <TeamSelect TeamList="@Keeper_of_the_Scores.Data.DataHandler.TeamList" @bind-SelectedTeam="teamB"></TeamSelect></div> 
+<div><TeamSelect TeamList="@DataHandler.TeamList" @bind-SelectedTeam="teamA"></TeamSelect> vs <TeamSelect TeamList="@DataHandler.TeamList" @bind-SelectedTeam="teamB"></TeamSelect></div> 
 
 
 <RadzenSelectBar @bind-Value=@inDoor TValue="bool">
@@ -34,7 +34,7 @@
         currentMatch.InDoor = inDoor;
         currentMatch.Scores = new List<Score>();
         currentMatch.RefName = "Tamas";
-        Keeper_of_the_Scores.Data.DataHandler.CurrentMatch = currentMatch;
+        Data.DataHandler.CurrentMatch = currentMatch;
 
         UriHelper.NavigateTo("currentmatch");
     }

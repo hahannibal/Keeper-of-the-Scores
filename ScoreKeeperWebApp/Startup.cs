@@ -40,7 +40,7 @@ namespace ScoreKeeperWebApp
             services.AddServerSideBlazor();
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
             services.AddDatabaseDeveloperPageExceptionFilter();
-            services.AddSingleton<Keeper_of_the_Scores.Data.DataHandler>();
+            services.AddSingleton<DataHandler>();
             
         }
 

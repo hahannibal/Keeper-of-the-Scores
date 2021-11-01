@@ -42,7 +42,7 @@ Assist:
     PlayerSelect playerB;
     PlayerSelect playerC;
     PlayerSelect playerD;
-    public static Match currentMatch = Keeper_of_the_Scores.Data.DataHandler.CurrentMatch;
+    public static Match currentMatch = Data.DataHandler.CurrentMatch;
     List<Player> playersA = currentMatch.Team1.Players;
     List<Player> playersB = currentMatch.Team2.Players;
     Player scorer;
@@ -58,7 +58,6 @@ Assist:
             score.DateTime = DateTime.Now;
             currentMatch.Scores.Add(score);
             dataGrid.Reload();
-            RemoveSelect();
         }
 
 
@@ -80,14 +79,6 @@ Assist:
 
     }
 
-    void RemoveSelect()
-    {
-        playerA.SelectedPlayer.Name = null;
-        playerB.SelectedPlayer.Name = null;
-        playerC.SelectedPlayer.Name = null;
-        playerD.SelectedPlayer.Name = null;
-    }
-
     void RemoveLast()
     {
         if (currentMatch.Scores.Count > 0)
@@ -100,7 +91,7 @@ Assist:
 
     void MatchOver()
     {
-        Keeper_of_the_Scores.Data.DataHandler.savedMatches.Add(currentMatch);
+        Data.DataHandler.savedMatches.Add(currentMatch);
 
         UriHelper.NavigateTo("/");
 

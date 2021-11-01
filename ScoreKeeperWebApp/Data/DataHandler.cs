@@ -6,7 +6,7 @@ using Google.Apis.Services;
 using System.IO;
 using System.Xml.Serialization;
 
-namespace Keeper_of_the_Scores.Data
+namespace ScoreKeeperWebApp.Data
 {
     public class DataHandler
     {
@@ -34,9 +34,9 @@ namespace Keeper_of_the_Scores.Data
             set { _settings = value; }
         }
 
-        private static List<Team> _teamList;
+        private List<Team> _teamList;
 
-        public static List<Team> TeamList
+        public List<Team> TeamList
         {
             get { return _teamList; }
             set { _teamList = value; }

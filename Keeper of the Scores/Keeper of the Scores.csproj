@@ -1,9 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>Keeper_of_the_Scores</RootNamespace>
+    <RootNamespace>ScoreKeeperWebApp</RootNamespace>
+    <ApplicationIcon />
+    <StartupObject />
+    <Win32Resource />
+    <AssemblyName>ScoreKeeperDataService</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
