@@ -18,26 +18,14 @@ Assist:
 
 <RadzenButton Click=@(args => AddToScoreB()) Text="Add" Style="margin-bottom: 20px; width: 150px" />
 
-<RadzenDataGrid @ref="dataGrid" AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" Data="@currentMatch.Scores" TItem="Score"
-                ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or" Style="height:300px">
-    <Columns>
-        <RadzenDataGridColumn TItem="Score" Property="DateTime" Title="Time" />
-        <RadzenDataGridColumn TItem="Score" Property="Scorer" Title="Scorer" Frozen="true">
-            <FooterTemplate>
-                Points: <b>@currentMatch.Scores.Where(Score => (currentMatch.Team1.Players.Contains(Score.Scorer))).ToList().Count</b> vs <b>@currentMatch.Scores.Where(Score => (currentMatch.Team2.Players.Contains(Score.Scorer))).ToList().Count</b>
-            </FooterTemplate>
-        </RadzenDataGridColumn>
-        <RadzenDataGridColumn TItem="Score" Property="Assist" Title="Assist" Frozen="true" />
-
-    </Columns>
-</RadzenDataGrid>
+<TeamScoreDataGrid currentMatch=@Data.DataHandler.CurrentMatch @ref="dataGrid"/>
 
 <RadzenButton Click=@(args => RemoveLast()) Text="Undo" Style="margin-bottom: 20px; width: 150px" />
 <RadzenButton Click=@(args => MatchOver()) Text="Match Over" Style="margin-bottom: 20px; width: 150px" />
 
 
 @code {
-    RadzenDataGrid<Score> dataGrid;
+    TeamScoreDataGrid dataGrid;
     PlayerSelect playerA;
     PlayerSelect playerB;
     PlayerSelect playerC;
