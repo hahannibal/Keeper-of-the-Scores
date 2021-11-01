@@ -1,6 +1,6 @@
 ﻿@page "/currentmatch"
 @inject NavigationManager UriHelper
-@inject Data.DataHandler DataHand
+@inject Data.DataHandler DataHandler
 
 <h3>OnGoingMatch</h3>
 @currentMatch.Team1.TeamName
@@ -21,7 +21,7 @@ Assist:
 
 <TeamScoreDataGrid currentMatch=@Data.DataHandler.CurrentMatch @ref="dataGrid"/>
 
-<RadzenButton Click=@(args => RemoveLast()) Text="Undo" Style="margin-bottom: 20px; width: 150px" />
+<RadzenButton Click=@(args => DataHandler.RemoveLast(currentMatch,dataGrid)) Text="Undo" Style="margin-bottom: 20px; width: 150px" />
 <RadzenButton Click=@(args => MatchOver()) Text="Match Over" Style="margin-bottom: 20px; width: 150px" />
 
 
@@ -68,15 +68,7 @@ Assist:
 
     }
 
-    void RemoveLast()
-    {
-        if (currentMatch.Scores.Count > 0)
-        {
-            currentMatch.Scores.RemoveAt(currentMatch.Scores.Count - 1);
-            dataGrid.Reload();
-        }
 
-    }
 
     void MatchOver()
     {

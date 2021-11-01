@@ -166,5 +166,15 @@ namespace ScoreKeeperWebApp.Data
             _teamList = (List<Team>)obj;
             reader.Close();
         }
+
+        public void RemoveLast(Match currentMatch, ScoreKeeperWebApp.Shared.TeamScoreDataGrid dataGrid)
+        {
+            if (currentMatch.Scores.Count > 0)
+            {
+                currentMatch.Scores.RemoveAt(currentMatch.Scores.Count - 1);
+                dataGrid.Reload();
+            }
+
+        }
     }
 }
