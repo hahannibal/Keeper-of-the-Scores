@@ -1,5 +1,6 @@
 ﻿@page "/currentmatch"
 @inject NavigationManager UriHelper
+@inject Data.DataHandler DataHand
 
 <h3>OnGoingMatch</h3>
 @currentMatch.Team1.TeamName
@@ -82,7 +83,6 @@ Assist:
         Data.DataHandler.savedMatches.Add(currentMatch);
 
         UriHelper.NavigateTo("/");
-
     }
 
 }
