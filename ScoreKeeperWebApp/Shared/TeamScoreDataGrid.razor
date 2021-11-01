@@ -19,6 +19,15 @@
     [Parameter]
     public RadzenDataGrid<Score> dataGrid{ get; set; }
 
+    [Parameter]
+    public EventCallback<List<Score>> ScoreListChanged { get; set; }
+
+    public void AutomaticReload(List<Score> scores)
+    {
+        ScoreListChanged.InvokeAsync(scores as List<Score>);
+        dataGrid.Reload();
+    }
+
     public void Reload()
     {
         dataGrid.Reload();

@@ -2,4 +2,17 @@
 
 <h1>Live matches</h1>
 
+@if (Data.DataHandler.CurrentMatch != null)
+{
+    <TeamScoreDataGrid @ref="dataGrid" currentMatch=@Data.DataHandler.CurrentMatch ScoreListChanged="@ScoreListChanged" />
+}
 
+
+
+@code{
+    TeamScoreDataGrid dataGrid;
+    public void ScoreListChanged()
+    {
+        dataGrid.Reload();
+    }
+}
