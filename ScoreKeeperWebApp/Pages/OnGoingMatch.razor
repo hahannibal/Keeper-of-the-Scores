@@ -7,15 +7,15 @@
 Scorer:
 <PlayerSelect @ref="_playerSelectA" PlayerList="playersA" @bind-SelectedPlayer="scorer"></PlayerSelect>
 Assist:
-<PlayerSelect @ref="playerB" PlayerList="playersA" @bind-SelectedPlayer="assist"></PlayerSelect>
+<PlayerSelect @ref="_playerSelectB" PlayerList="playersA" @bind-SelectedPlayer="assist"></PlayerSelect>
 
 <RadzenButton Click=@(args => AddToScore()) Text="Add" Style="margin-bottom: 20px; width: 150px" />
 
 @currentMatch.Team2.TeamName
 Scorer:
-<PlayerSelect @ref="playerC" PlayerList="playersB" @bind-SelectedPlayer="scorer"></PlayerSelect>
+<PlayerSelect @ref="_playerSelectC" PlayerList="playersB" @bind-SelectedPlayer="scorer"></PlayerSelect>
 Assist:
-<PlayerSelect @ref="playerD" PlayerList="playersB" @bind-SelectedPlayer="assist"></PlayerSelect>
+<PlayerSelect @ref="_playerSelectD" PlayerList="playersB" @bind-SelectedPlayer="assist"></PlayerSelect>
 
 <RadzenButton Click=@(args => AddToScore()) Text="Add" Style="margin-bottom: 20px; width: 150px" />
 
@@ -28,9 +28,9 @@ Assist:
 @code {
     TeamScoreDataGrid dataGrid;
     PlayerSelect _playerSelectA;
-    PlayerSelect playerB;
-    PlayerSelect playerC;
-    PlayerSelect playerD;
+    PlayerSelect _playerSelectB;
+    PlayerSelect _playerSelectC;
+    PlayerSelect _playerSelectD;
     Match currentMatch;
     List<Player> playersA;
     List<Player> playersB;
@@ -48,14 +48,18 @@ Assist:
             score.DateTime = DateTime.Now;
             currentMatch.Scores.Add(score);
             dataGrid.Reload();
-            _playerSelectA.Reset();
-            playerB.Reset();
-            playerC.Reset();
-            playerD.Reset();
+            ResetAll();
         }
 
 
 
+    }
+    void ResetAll()
+    {
+        _playerSelectA.Reset();
+        _playerSelectB.Reset();
+        _playerSelectC.Reset();
+        _playerSelectD.Reset();
     }
 
     void Undo()
