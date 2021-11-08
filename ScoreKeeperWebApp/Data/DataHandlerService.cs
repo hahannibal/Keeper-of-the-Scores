@@ -8,10 +8,10 @@ using System.Xml.Serialization;
 
 namespace ScoreKeeperWebApp.Data
 {
-    public class DataHandler
+    public class DataHandlerService
     {
 
-        public DataHandler()
+        public DataHandlerService()
         {
             //ReadSettings();
             //ReadData();
@@ -167,6 +167,10 @@ namespace ScoreKeeperWebApp.Data
             reader.Close();
         }
 
+        /// <summary>
+        /// Removing the last score
+        /// </summary>
+        /// <param name="currentMatch">currently running match</param>
         public void RemoveLast(Match currentMatch)
         {
             if (currentMatch.Scores.Count > 0)

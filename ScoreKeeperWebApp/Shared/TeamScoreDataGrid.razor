@@ -4,7 +4,7 @@
         <RadzenDataGridColumn TItem="Score" Property="DateTime" Title="Time" />
         <RadzenDataGridColumn TItem="Score" Property="Scorer" Title="Scorer" Frozen="true">
             <FooterTemplate>
-                Points: <b>@counter()</b>
+                Points: <b>@ScoreCounter()</b>
             </FooterTemplate>
         </RadzenDataGridColumn>
         <RadzenDataGridColumn TItem="Score" Property="Assist" Title="Assist" Frozen="true" />
@@ -32,7 +32,7 @@
         _dataGrid.Reload();
     }
 
-    public string counter()
+    public string ScoreCounter()
     {
         int teamACount = CurrentMatch.Scores.Where(Score => (CurrentMatch.Team1.Players.Contains(Score.Scorer))).ToList().Count;
         int teamBCount = CurrentMatch.Scores.Where(Score => (CurrentMatch.Team2.Players.Contains(Score.Scorer))).ToList().Count;
