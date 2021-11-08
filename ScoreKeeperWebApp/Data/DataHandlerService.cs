@@ -5,6 +5,7 @@ using Google.Apis.Sheets.v4.Data;
 using Google.Apis.Services;
 using System.IO;
 using System.Xml.Serialization;
+using System.Linq;
 
 namespace ScoreKeeperWebApp.Data
 {
@@ -178,6 +179,16 @@ namespace ScoreKeeperWebApp.Data
                 currentMatch.Scores.RemoveAt(currentMatch.Scores.Count - 1);
             }
 
+        }
+        /// <summary>
+        /// currently running match's score counter
+        /// </summary>
+        /// <returns>team A score : team B score</returns>
+        public string ScoreCounter()
+        {
+            int teamACount = CurrentMatch.Scores.Where(Score => (CurrentMatch.Team1.Players.Contains(Score.Scorer))).ToList().Count;
+            int teamBCount = CurrentMatch.Scores.Where(Score => (CurrentMatch.Team2.Players.Contains(Score.Scorer))).ToList().Count;
+            return $"{teamACount} : {teamBCount}";
         }
     }
 }
