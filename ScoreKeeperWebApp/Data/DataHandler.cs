@@ -18,9 +18,9 @@ namespace ScoreKeeperWebApp.Data
             LoadTeams();
         }
 
-        private static Match _currentMatch;
+        private Match _currentMatch;
 
-        public static Match CurrentMatch
+        public Match CurrentMatch
         {
             get { return _currentMatch; }
             set { _currentMatch = value; }
@@ -43,7 +43,7 @@ namespace ScoreKeeperWebApp.Data
         }
         private string _savedTeams = "Teams.xml";
         private string _savedMatches = "Matches.xml";
-        public static List<Match> savedMatches = new List<Match>();
+        public List<Match> savedMatches = new List<Match>();
 
         /// <summary>
         /// Reads the data from the goolge sheets
@@ -167,12 +167,11 @@ namespace ScoreKeeperWebApp.Data
             reader.Close();
         }
 
-        public void RemoveLast(Match currentMatch, ScoreKeeperWebApp.Shared.TeamScoreDataGrid dataGrid)
+        public void RemoveLast(Match currentMatch)
         {
             if (currentMatch.Scores.Count > 0)
             {
                 currentMatch.Scores.RemoveAt(currentMatch.Scores.Count - 1);
-                dataGrid.Reload();
             }
 
         }

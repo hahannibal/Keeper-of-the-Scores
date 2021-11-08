@@ -1,10 +1,10 @@
-﻿<RadzenDataGrid @ref="dataGrid" AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" Data="@currentMatch.Scores" TItem="Score"
+﻿<RadzenDataGrid @ref="_dataGrid" AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" Data="@CurrentMatch.Scores" TItem="Score"
                 ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or" Style="height:300px">
     <Columns>
         <RadzenDataGridColumn TItem="Score" Property="DateTime" Title="Time" />
         <RadzenDataGridColumn TItem="Score" Property="Scorer" Title="Scorer" Frozen="true">
             <FooterTemplate>
-                Points: <b>@counter(currentMatch)</b>
+                Points: <b>@counter()</b>
             </FooterTemplate>
         </RadzenDataGridColumn>
         <RadzenDataGridColumn TItem="Score" Property="Assist" Title="Assist" Frozen="true" />
@@ -14,10 +14,9 @@
 
 @code {
     [Parameter]
-    public Match currentMatch{ get; set; }
+    public Match CurrentMatch{ get; set; }
 
-    [Parameter]
-    public RadzenDataGrid<Score> dataGrid{ get; set; }
+    private RadzenDataGrid<Score> _dataGrid{ get; set; }
 
     [Parameter]
     public EventCallback<List<Score>> ScoreListChanged { get; set; }
@@ -25,18 +24,18 @@
     public void AutomaticReload(List<Score> scores)
     {
         ScoreListChanged.InvokeAsync(scores as List<Score>);
-        dataGrid.Reload();
+        _dataGrid.Reload();
     }
 
     public void Reload()
     {
-        dataGrid.Reload();
+        _dataGrid.Reload();
     }
 
-    public string counter(Match currentMatch)
+    public string counter()
     {
-        int teamACount = currentMatch.Scores.Where(Score => (currentMatch.Team1.Players.Contains(Score.Scorer))).ToList().Count;
-        int teamBCount = currentMatch.Scores.Where(Score => (currentMatch.Team2.Players.Contains(Score.Scorer))).ToList().Count;
+        int teamACount = CurrentMatch.Scores.Where(Score => (CurrentMatch.Team1.Players.Contains(Score.Scorer))).ToList().Count;
+        int teamBCount = CurrentMatch.Scores.Where(Score => (CurrentMatch.Team2.Players.Contains(Score.Scorer))).ToList().Count;
         return $"{teamACount} : {teamBCount}";
     }
 }

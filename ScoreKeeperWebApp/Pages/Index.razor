@@ -1,10 +1,11 @@
 ﻿@page "/"
+@inject Data.DataHandler DataHandler
 
 <h1>Live matches</h1>
 
-@if (Data.DataHandler.CurrentMatch != null)
+@if (DataHandler.CurrentMatch != null)
 {
-    <TeamScoreDataGrid @ref="dataGrid" currentMatch=@Data.DataHandler.CurrentMatch ScoreListChanged="@ScoreListChanged" />
+    <TeamScoreDataGrid @ref="dataGrid" currentMatch=@DataHandler.CurrentMatch ScoreListChanged="@ScoreListChanged" />
 }
 
 

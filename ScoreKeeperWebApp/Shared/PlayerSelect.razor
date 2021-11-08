@@ -1,6 +1,7 @@
-﻿<RadzenDropDown AllowClear="true" TValue="Player" Style="width:300px" Data="PlayerList" Change=@(args => OnChange(args)) />
+﻿<RadzenDropDown @ref="DropDown" AllowClear="true" TValue="Player" Style="width:300px" Data="PlayerList" Change=@(args => OnChange(args)) />
 
 @code {
+    RadzenDropDown<Player> DropDown;
     [Parameter]
     public List<Player> PlayerList { get; set; }
     [Parameter]
@@ -8,8 +9,14 @@
     [Parameter]
     public EventCallback<Player> SelectedPlayerChanged { get; set; }
 
+
     public void OnChange(object value)
     {
         SelectedPlayerChanged.InvokeAsync(value as Player);
+    }
+
+    public void Reset()
+    {
+        DropDown.Reset();
     }
 }
