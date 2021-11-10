@@ -1,6 +1,6 @@
 ﻿@page "/"
 @inject Data.DataHandlerService DataHandler
-@inject Data.AppState AppState
+
 @implements IDisposable
 
 <h1>Live matches</h1>
@@ -16,17 +16,17 @@
     public TeamScoreDataGrid dataGrid;
     protected override void OnInitialized()
     {
-        AppState.OnChange += StateHasChanged;
+        DataHandler.OnScoreChange += ReloadGrid;
 
     }
     public void Dispose()
     {
-        AppState.OnChange -= StateHasChanged;
+        DataHandler.OnScoreChange -= ReloadGrid;
     }
 
-    void ReloadGrid()
+    void ReloadGrid() //rak: this was never called?
     {
-        AppState.ReloadGrid(DataHandler.CurrentMatch.Scores);
-        dataGrid.Reload();
+        dataGrid?.Reload();
+        InvokeAsync(StateHasChanged);
     }
 }

@@ -18,6 +18,11 @@ namespace ScoreKeeperWebApp.Data
             //ReadData();
             LoadTeams();
         }
+        #region Events
+        public event Action OnScoreChange;
+
+        private void NotifyScoreChanged() => OnScoreChange?.Invoke();
+        #endregion
 
         private Match _currentMatch;
 
@@ -64,12 +69,12 @@ namespace ScoreKeeperWebApp.Data
 
             var teamNameRange = $"teams!B1:1";
             var TeamName = service.Spreadsheets.Values.Get(Settings.TeamSheetsID, teamNameRange).Execute().Values;
-            
+
             var range = $"teams!B2:ZZ";
             var PlayerNames = service.Spreadsheets.Values.Get(Settings.TeamSheetsID, range).Execute().Values;
             int counter = TeamName[0].Count; //counting the columns to get the number of teams;
-            
-            for (int i = 0; i < counter; i++) 
+
+            for (int i = 0; i < counter; i++)
             {
                 Team newTeam = new Team();
 
@@ -92,7 +97,7 @@ namespace ScoreKeeperWebApp.Data
 
             }
             TeamList = teams;
-            
+
         }
 
         /// <summary>
@@ -148,12 +153,12 @@ namespace ScoreKeeperWebApp.Data
 
         public void ReadSettings()
         {
-                XmlSerializer deserializer = new XmlSerializer(typeof(Options));
-                TextReader reader = new StreamReader("..\\ScoreKeeperWebApp\\Data\\XML\\settings.xml");
-                object obj = deserializer.Deserialize(reader);
-                _settings = (Options)obj;
-                reader.Close();
-            
+            XmlSerializer deserializer = new XmlSerializer(typeof(Options));
+            TextReader reader = new StreamReader("..\\ScoreKeeperWebApp\\Data\\XML\\settings.xml");
+            object obj = deserializer.Deserialize(reader);
+            _settings = (Options)obj;
+            reader.Close();
+
         }
 
         /// <summary>
@@ -179,16 +184,27 @@ namespace ScoreKeeperWebApp.Data
                 currentMatch.Scores.RemoveAt(currentMatch.Scores.Count - 1);
             }
 
+            NotifyScoreChanged();
         }
         /// <summary>
         /// currently running match's score counter
         /// </summary>
         /// <returns>team A score : team B score</returns>
-        public string ScoreCounter()
+        public string ScoreCounter() //rak: this was never called?
         {
+          
             int teamACount = CurrentMatch.Scores.Where(Score => (CurrentMatch.Team1.Players.Contains(Score.Scorer))).ToList().Count;
             int teamBCount = CurrentMatch.Scores.Where(Score => (CurrentMatch.Team2.Players.Contains(Score.Scorer))).ToList().Count;
             return $"{teamACount} : {teamBCount}";
+
+
         }
+
+        public void AddCurrentMatchScore(Score s)
+        {
+            if (CurrentMatch != null)
+                CurrentMatch.Scores.Add(s);
+            NotifyScoreChanged();
+        }       
     }
 }

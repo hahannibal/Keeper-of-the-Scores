@@ -41,7 +41,6 @@ namespace ScoreKeeperWebApp
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddSingleton<DataHandlerService>();
-            services.AddSingleton<AppState>();
 
         }
 
