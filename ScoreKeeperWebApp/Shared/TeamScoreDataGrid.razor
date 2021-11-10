@@ -1,4 +1,6 @@
-﻿<RadzenDataGrid @ref="_dataGrid" AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" Data="@CurrentMatch.Scores" TItem="Score"
+﻿@inject Data.AppState AppState
+
+<RadzenDataGrid @ref="_dataGrid" AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" Data="@CurrentMatch.Scores" TItem="Score"
                 ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or" Style="height:300px">
     <Columns>
         <RadzenDataGridColumn TItem="Score" Property="DateTime" Title="Time" />
@@ -24,6 +26,12 @@
     public void AutomaticReload(List<Score> scores)
     {
         ScoreListChanged.InvokeAsync(scores as List<Score>);
+        _dataGrid.Reload();
+    }
+
+    void ReloadGrid()
+    {
+        AppState.ReloadGrid(CurrentMatch.Scores);
         _dataGrid.Reload();
     }
 

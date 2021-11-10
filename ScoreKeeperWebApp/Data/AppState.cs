@@ -7,11 +7,14 @@ namespace ScoreKeeperWebApp.Data
 {
     public class AppState
     {
+        public List<Score> Scores { get; private set; }
+
         public event Action OnChange;
 
-        public void ReloadGrid(Shared.TeamScoreDataGrid dataGrid)
+        public void ReloadGrid(List<Score> scores)
         {
-            dataGrid.Reload();
+            Scores = scores;
+            NotifyStateChanged();
         }
 
         private void NotifyStateChanged() => OnChange?.Invoke();
