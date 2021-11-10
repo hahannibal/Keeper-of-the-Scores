@@ -1,7 +1,6 @@
 ﻿@page "/currentmatch"
 @inject NavigationManager UriHelper
 @inject Data.DataHandlerService DataHandler
-@inject Data.AppState AppState
 
 <h3>OnGoingMatch</h3>
 @currentMatch.Team1.TeamName
@@ -47,7 +46,8 @@ Assist:
             score.Scorer = scorer;
             score.Assist = assist;
             score.DateTime = DateTime.Now;
-            currentMatch.Scores.Add(score);
+            //currentMatch.Scores.Add(score);
+            DataHandler.AddCurrentMatchScore(score);
             dataGrid.Reload();
             ResetAll();
         }
