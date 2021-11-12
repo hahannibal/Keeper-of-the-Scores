@@ -19,14 +19,13 @@ Assist:
 
 <RadzenButton Click=@(args => AddToScore()) Text="Add" Style="margin-bottom: 20px; width: 150px" />
 
-<TeamScoreDataGrid currentMatch=@DataHandler.CurrentMatch @ref="dataGrid" />
+<TeamScoreDataGrid currentMatch=@DataHandler.CurrentMatch />
 
 <RadzenButton Click=@(args => Undo()) Text="Undo" Style="margin-bottom: 20px; width: 150px" />
 <RadzenButton Click=@(args => MatchOver()) Text="Match Over" Style="margin-bottom: 20px; width: 150px" />
 
 
 @code {
-    TeamScoreDataGrid dataGrid;
     PlayerSelect _playerSelectA;
     PlayerSelect _playerSelectB;
     PlayerSelect _playerSelectC;
@@ -46,9 +45,7 @@ Assist:
             score.Scorer = scorer;
             score.Assist = assist;
             score.DateTime = DateTime.Now;
-            //currentMatch.Scores.Add(score);
             DataHandler.AddCurrentMatchScore(score);
-            dataGrid.Reload();
             ResetAll();
         }
 
@@ -66,7 +63,6 @@ Assist:
     void Undo()
     {
         DataHandler.RemoveLast(currentMatch);
-        dataGrid.Reload();
     }
 
     void MatchOver()
