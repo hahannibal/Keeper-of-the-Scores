@@ -7,7 +7,7 @@
         <RadzenDataGridColumn TItem="Score" Property="DateTime" Title="Time" />
         <RadzenDataGridColumn TItem="Score" Property="Scorer" Title="Scorer" Frozen="true">
             <FooterTemplate>
-                Points: <b>@ScoreCounter</b> @*rak: not the cleanest idea to call a method here, a property is more apropiate*@
+                Points: <b>@ScoreCounter</b>
             </FooterTemplate>
         </RadzenDataGridColumn>
         <RadzenDataGridColumn TItem="Score" Property="Assist" Title="Assist" Frozen="true" />
@@ -21,10 +21,6 @@
 
     private RadzenDataGrid<Score> _dataGrid{ get; set; }
 
-    [Parameter]
-    public EventCallback<List<Score>> ScoreListChanged { get; set; }
-
-
     string ScoreCounter;
 
     public void Reload()
@@ -35,14 +31,12 @@
     protected override void OnInitialized()
     {
         DataHandler.OnScoreChange += ReloadScore;
-        ScoreCounter = DataHandler.ScoreCounter();
     }
 
     void ReloadScore()
     {
         _dataGrid.Reload();
         ScoreCounter = DataHandler.ScoreCounter();
-        InvokeAsync(StateHasChanged);
     }
 
     public void Dispose()
