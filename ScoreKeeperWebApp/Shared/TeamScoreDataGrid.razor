@@ -1,4 +1,5 @@
-﻿
+﻿@inject Data.DataHandlerService DataHandler
+@implements IDisposable
 
 <RadzenDataGrid @ref="_dataGrid" AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" Data="@CurrentMatch.Scores" TItem="Score"
                 ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or" Style="height:300px">
@@ -6,7 +7,7 @@
         <RadzenDataGridColumn TItem="Score" Property="DateTime" Title="Time" />
         <RadzenDataGridColumn TItem="Score" Property="Scorer" Title="Scorer" Frozen="true">
             <FooterTemplate>
-                Points: <b>@ScoreCounter()</b> @*rak: not the cleanest idea to call a method here, a property is more apropiate*@
+                Points: <b>@ScoreCounter</b> @*rak: not the cleanest idea to call a method here, a property is more apropiate*@
             </FooterTemplate>
         </RadzenDataGridColumn>
         <RadzenDataGridColumn TItem="Score" Property="Assist" Title="Assist" Frozen="true" />
@@ -23,27 +24,30 @@
     [Parameter]
     public EventCallback<List<Score>> ScoreListChanged { get; set; }
 
-    public void AutomaticReload(List<Score> scores)
-    {
-        ScoreListChanged.InvokeAsync(scores as List<Score>);
-        _dataGrid.Reload();
-    }
 
-    //void ReloadGrid()  //rak: this was never called?
-    //{
-    //    AppState.ReloadGrid(CurrentMatch.Scores);
-    //    _dataGrid.Reload();
-    //}
+    string ScoreCounter;
 
     public void Reload()
     {
         _dataGrid.Reload();
     }
 
-    public string ScoreCounter()
+    protected override void OnInitialized()
     {
-        int teamACount = CurrentMatch.Scores.Where(Score => (CurrentMatch.Team1.Players.Contains(Score.Scorer))).ToList().Count;
-        int teamBCount = CurrentMatch.Scores.Where(Score => (CurrentMatch.Team2.Players.Contains(Score.Scorer))).ToList().Count;
-        return $"{teamACount} : {teamBCount}";
+        DataHandler.OnScoreChange += ReloadScore;
+        ScoreCounter = DataHandler.ScoreCounter();
     }
+
+    void ReloadScore()
+    {
+        ScoreCounter = DataHandler.ScoreCounter();
+        InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        DataHandler.OnScoreChange -= ReloadScore;
+    }
+
+
 }

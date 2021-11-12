@@ -7,13 +7,14 @@
 
 @if (DataHandler.CurrentMatch != null)
 {
-    <TeamScoreDataGrid @ref="dataGrid" currentMatch=@DataHandler.CurrentMatch />
+    @scores
 }
 
 
 
 @code{
     public TeamScoreDataGrid dataGrid;
+    public string scores;
     protected override void OnInitialized()
     {
         DataHandler.OnScoreChange += ReloadGrid;
@@ -26,6 +27,7 @@
 
     void ReloadGrid() //rak: this was never called?
     {
+        scores = DataHandler.CurrentMatch.Team1 + " vs " + DataHandler.CurrentMatch.Team2 + " : " + DataHandler.ScoreCounter();
         dataGrid?.Reload();
         InvokeAsync(StateHasChanged);
     }
