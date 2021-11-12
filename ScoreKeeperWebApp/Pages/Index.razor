@@ -13,22 +13,20 @@
 
 
 @code{
-    public TeamScoreDataGrid dataGrid;
     public string scores;
     protected override void OnInitialized()
     {
-        DataHandler.OnScoreChange += ReloadGrid;
+        DataHandler.OnScoreChange += ReloadScores;
 
     }
     public void Dispose()
     {
-        DataHandler.OnScoreChange -= ReloadGrid;
+        DataHandler.OnScoreChange -= ReloadScores;
     }
 
-    void ReloadGrid() //rak: this was never called?
+    void ReloadScores()
     {
         scores = DataHandler.CurrentMatch.Team1 + " vs " + DataHandler.CurrentMatch.Team2 + " : " + DataHandler.ScoreCounter();
-        dataGrid?.Reload();
         InvokeAsync(StateHasChanged);
     }
 }
