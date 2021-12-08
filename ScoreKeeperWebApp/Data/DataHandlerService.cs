@@ -24,13 +24,22 @@ namespace ScoreKeeperWebApp.Data
         private void NotifyScoreChanged() => OnScoreChange?.Invoke();
         #endregion
 
-        private Match _currentMatch;
+        //private Match _currentMatch;
 
-        public Match CurrentMatch
+        //public Match CurrentMatch
+        //{
+        //    get { return _currentMatch; }
+        //    set { _currentMatch = value; }
+        //}
+
+        private List<Match> _liveMatches = new List<Match>();
+
+        public List<Match> LiveMatches
         {
-            get { return _currentMatch; }
-            set { _currentMatch = value; }
+            get { return _liveMatches; }
+            set { _liveMatches = value; }
         }
+
 
 
         private Options _settings;
@@ -193,8 +202,8 @@ namespace ScoreKeeperWebApp.Data
         public string ScoreCounter() //rak: this was never called?
         {
           
-            int teamACount = CurrentMatch.Scores.Where(Score => (CurrentMatch.Team1.Players.Contains(Score.Scorer))).ToList().Count;
-            int teamBCount = CurrentMatch.Scores.Where(Score => (CurrentMatch.Team2.Players.Contains(Score.Scorer))).ToList().Count;
+            int teamACount = LiveMatches[0].Scores.Where(Score => (LiveMatches[0].Team1.Players.Contains(Score.Scorer))).ToList().Count;
+            int teamBCount = LiveMatches[0].Scores.Where(Score => (LiveMatches[0].Team2.Players.Contains(Score.Scorer))).ToList().Count;
             return $"{teamACount} : {teamBCount}";
 
 
@@ -202,8 +211,8 @@ namespace ScoreKeeperWebApp.Data
 
         public void AddCurrentMatchScore(Score s)
         {
-            if (CurrentMatch != null)
-                CurrentMatch.Scores.Add(s);
+            if (LiveMatches[0] != null)
+                LiveMatches[0].Scores.Add(s);
             NotifyScoreChanged();
         }       
     }

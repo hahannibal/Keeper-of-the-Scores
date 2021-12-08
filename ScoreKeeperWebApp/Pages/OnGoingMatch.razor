@@ -19,7 +19,7 @@ Assist:
 
 <RadzenButton Click=@(args => AddToScore()) Text="Add" Style="margin-bottom: 20px; width: 150px" />
 
-<TeamScoreDataGrid currentMatch=@DataHandler.CurrentMatch />
+<TeamScoreDataGrid currentMatch=@DataHandler.LiveMatches[0] />
 
 <RadzenButton Click=@(args => Undo()) Text="Undo" Style="margin-bottom: 20px; width: 150px" />
 <RadzenButton Click=@(args => MatchOver()) Text="Match Over" Style="margin-bottom: 20px; width: 150px" />
@@ -74,7 +74,7 @@ Assist:
 
     protected override void OnInitialized()
     {
-        currentMatch = DataHandler.CurrentMatch;
+        currentMatch = DataHandler.LiveMatches[0];
         playersA = currentMatch.Team1.Players;
         playersB = currentMatch.Team2.Players;
 

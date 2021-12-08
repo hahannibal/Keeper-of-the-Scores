@@ -34,7 +34,8 @@
         currentMatch.InDoor = inDoor;
         currentMatch.Scores = new List<Score>();
         currentMatch.RefName = "Tamas";
-        DataHandler.CurrentMatch = currentMatch;
+
+        DataHandler.LiveMatches.Add(currentMatch);
 
         UriHelper.NavigateTo("currentmatch");
     }
