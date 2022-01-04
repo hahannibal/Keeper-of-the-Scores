@@ -24,14 +24,6 @@ namespace ScoreKeeperWebApp.Data
         private void NotifyScoreChanged() => OnScoreChange?.Invoke();
         #endregion
 
-        //private Match _currentMatch;
-
-        //public Match CurrentMatch
-        //{
-        //    get { return _currentMatch; }
-        //    set { _currentMatch = value; }
-        //}
-
         private List<Match> _liveMatches = new List<Match>();
 
         public List<Match> LiveMatches
@@ -40,7 +32,17 @@ namespace ScoreKeeperWebApp.Data
             set { _liveMatches = value; }
         }
 
+        /// <summary>
+        /// Returns the match belonging for the current Referee
+        /// </summary>
+        /// <param name="currentReferee"></param>
+        /// <returns></returns>
 
+        public Match ReturnMatch(string currentReferee)
+        {
+            Match match = LiveMatches.Where(i => i.RefName == currentReferee).FirstOrDefault();
+            return match;
+        }
 
         private Options _settings;
         public Options Settings
