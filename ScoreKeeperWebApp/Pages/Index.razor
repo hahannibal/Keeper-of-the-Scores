@@ -5,18 +5,27 @@
 
 <h1>Live matches</h1>
 
-@if (DataHandler.LiveMatches != null)
+<h5>@if (score1 != null)
 {
-    @scores
+    @score1
 }
+</h5>
+<h5>
+@if (score2 != null)
+{
+    @score2
+}
+</h5>
 
 
 
 @code{
-    public string scores;
+    public string score1;
+    public string score2;
     protected override void OnInitialized()
     {
         DataHandler.OnScoreChange += ReloadScores;
+        
 
     }
     public void Dispose()
@@ -26,7 +35,8 @@
 
     void ReloadScores()
     {
-        scores = DataHandler.LiveMatches[0].Team1 + " vs " + DataHandler.LiveMatches[0].Team2 + " : " + DataHandler.ScoreCounter();
+        score1 = DataHandler.LiveMatches[0].Team1 + " vs " + DataHandler.LiveMatches[0].Team2 + " : " + DataHandler.ScoreCounter();
+        score2 = DataHandler.LiveMatches[1].Team1 + " vs " + DataHandler.LiveMatches[1].Team2 + " : " + DataHandler.ScoreCounter();
         InvokeAsync(StateHasChanged);
     }
 }

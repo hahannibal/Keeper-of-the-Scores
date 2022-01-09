@@ -74,7 +74,7 @@ Assist:
 
     protected override void OnInitialized()
     {
-        currentMatch = DataHandler.LiveMatches[0];
+        currentMatch = DataHandler.ReturnMatch(DataHandler.referee);
         playersA = currentMatch.Team1.Players;
         playersB = currentMatch.Team2.Players;
 

@@ -32,6 +32,8 @@ namespace ScoreKeeperWebApp.Data
             set { _liveMatches = value; }
         }
 
+        public string referee = null;
+
         /// <summary>
         /// Returns the match belonging for the current Referee
         /// </summary>
@@ -40,8 +42,15 @@ namespace ScoreKeeperWebApp.Data
 
         public Match ReturnMatch(string currentReferee)
         {
-            Match match = LiveMatches.Where(i => i.RefName == currentReferee).FirstOrDefault();
-            return match;
+            if (LiveMatches != null)
+            {
+                Match match = LiveMatches.Where(i => i.RefName == currentReferee).FirstOrDefault();
+                return match;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         private Options _settings;

@@ -20,6 +20,7 @@
 <RadzenNumeric TValue="int" Min="1" Max="15" />
 
 <p><RadzenButton Click=@(args => StartMatch()) Text="Start" Style="margin-bottom: 20px; width: 150px" /></p>
+<p><RadzenButton Click=@(args => StartMatch2()) Text="Start by Florian" Style="margin-bottom: 20px; width: 150px" /></p>
 
 @code {
     public static Team teamA;
@@ -34,6 +35,22 @@
         currentMatch.InDoor = inDoor;
         currentMatch.Scores = new List<Score>();
         currentMatch.RefName = "Tamas";
+        DataHandler.referee = "Tamas";
+
+        DataHandler.LiveMatches.Add(currentMatch);
+
+        UriHelper.NavigateTo("currentmatch");
+    }
+
+    void StartMatch2()
+    {
+        Match currentMatch = new Match();
+        currentMatch.Team1 = teamA;
+        currentMatch.Team2 = teamB;
+        currentMatch.InDoor = inDoor;
+        currentMatch.Scores = new List<Score>();
+        currentMatch.RefName = "Florian";
+        DataHandler.referee = "Florian";
 
         DataHandler.LiveMatches.Add(currentMatch);
 
